@@ -8,9 +8,26 @@
 </head>
 <body>
 
+<div id="start-overlay">
+    <div class="overlay-content">
+        <h1>HSR KOK KOMPE</h1>
+        <p>Mode: 3 Node Ban & Pick</p>
+        <button onclick="startGame()">MULAI DRAFT</button>
+    </div>
+</div>
+
 <header>
-    <h1>HSR Astral Draft</h1>
-    <div id="status-bar">Loading...</div>
+    <h1>HSR Kok Kompe</h1>
+    
+    <div id="timer-wrapper">
+        <div id="timer-container">
+            <div id="timer">30</div>
+            <span>DETIK</span>
+        </div>
+        <div id="timer-status" style="font-size: 0.8rem; color: #888; margin-top: 5px;">PAUSED</div>
+    </div>
+
+    <div id="status-bar">Menunggu Start...</div>
 </header>
 
 <div class="arena">
@@ -18,19 +35,18 @@
         <div class="team-title">BLUE TEAM</div>
         <div class="slot-container" id="blue-slots"></div>
         <div class="ban-section">
-            <div class="ban-label">BANNED</div>
-            <div id="blue-ban-slot" class="ban-slot">Empty</div>
+            <div class="ban-label">BLUE BANS (Saved)</div>
+            <div class="team-ban-container" id="blue-bans"></div>
         </div>
     </div>
 
     <div class="hero-pool">
         <div class="universal-ban-area">
             <div class="ban-header">
-                <span class="ban-title">UNIVERSAL BAN (OPSIONAL)</span>
+                <span class="ban-title">UNIVERSAL BAN</span>
                 <button id="toggle-univ-btn" onclick="toggleUniversalMode()">MODE: OFF</button>
             </div>
-            <div class="ban-grid" id="univ-ban-slots">
-                </div>
+            <div class="ban-grid" id="univ-ban-slots"></div>
         </div>
 
         <input type="text" class="search-bar" placeholder="Cari Karakter..." onkeyup="filterChars(this.value)">
@@ -41,8 +57,8 @@
         <div class="team-title">RED TEAM</div>
         <div class="slot-container" id="red-slots"></div>
         <div class="ban-section">
-            <div class="ban-label">BANNED</div>
-            <div id="red-ban-slot" class="ban-slot">Empty</div>
+            <div class="ban-label">RED BANS (Saved)</div>
+            <div class="team-ban-container" id="red-bans"></div>
         </div>
     </div>
 </div>
