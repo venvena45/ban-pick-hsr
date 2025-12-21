@@ -1,5 +1,3 @@
-/* ... (Bagian root dan body sama seperti sebelumnya) ... */
-
 :root {
     --bg-color: #0f1014;
     --panel-bg: #1d1e26;
@@ -12,18 +10,14 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
-    /* --- PENGATURAN BACKGROUND IMAGE --- */
-    
-    /* Ganti 'background.jpg' dengan nama file gambar Anda atau Link URL Gambar */
-    /* linear-gradient digunakan untuk memberi lapisan gelap agar tulisan tetap terbaca */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('image/bg.jpeg');
-    
-    background-size: cover;       /* Memaksa gambar memenuhi seluruh layar */
-    background-position: center;  /* Memosisikan gambar di tengah */
-    background-attachment: fixed; /* Agar gambar tetap diam saat discroll */
-    background-repeat: no-repeat; /* Agar gambar tidak berulang-ulang */
-    
-    /* ----------------------------------- */
+    /* --- BACKGROUND SETUP --- */
+    /* linear-gradient memberikan efek gelap agar tulisan putih terbaca */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('image/bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* ------------------------ */
 
     color: var(--text-main);
     margin: 0;
@@ -31,396 +25,10 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Agar teks lebih jelas di atas gambar */
 }
 
-/* HEADER & TIMER */
-header {
-    text-align: center;
-    padding: 10px;
-    
-    /* UBAH JADI TRANSPARENT */
-    background: transparent; 
-    backdrop-filter: none; /* Hapus efek blur jika ada */
-    border-bottom: none;   /* Opsional: Hapus garis emas di bawah header jika mau */
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    z-index: 10;
-}
-
-h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
-/* ... (Bagian CSS sebelumnya tetap sama, tambahkan/ubah bagian HEADER) ... */
-
-/* Update Header Layout */
-#timer-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-#timer-container {
-    background: #000;
-    border: 3px solid var(--gold);
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 15px rgba(212, 177, 104, 0.5);
-    transition: 0.3s;
-}
-
-#timer {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    line-height: 1;
-}
-
-#timer-container span {
-    font-size: 0.6rem;
-    color: #888;
-}
-
-/* Tombol Start Timer */
-#start-timer-btn {
-    background: linear-gradient(45deg, #28a745, #218838);
-    border: none;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    transition: transform 0.1s;
-}
-
-#start-timer-btn:active {
-    transform: scale(0.95);
-}
-
-#start-timer-btn:disabled {
-    background: #444;
-    color: #888;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-/* ... (Sisa CSS sama) ... */
-#status-bar {
-    padding: 5px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #333;
-    border-radius: 5px;
-    min-width: 300px;
-}
-
-/* MAIN LAYOUT */
-.arena {
-    display: flex;
-    flex: 1;
-    padding: 10px 20px 20px 20px;
-    gap: 20px;
-    overflow: hidden;
-}
-
-/* Update Panel Tim */
-.team-panel {
-    flex: 1;
-    
-    /* GANTI BAGIAN INI */
-    /* background-color: var(--panel-bg); <-- HAPUS INI */
-    background-color: rgba(29, 30, 38, 0.85); /* Ubah jadi transparan (0.85) */
-    
-    border-radius: 10px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #333;
-    transition: 0.3s;
-}
-
-/* Update Panel Tengah (Hero Pool) */
-.hero-pool {
-    flex: 2;
-    
-    /* GANTI BAGIAN INI */
-    /* background-color: var(--panel-bg); <-- HAPUS INI */
-    background-color: rgba(29, 30, 38, 0.85); /* Ubah jadi transparan (0.85) */
-    
-    border-radius: 10px;
-    padding: 15px;
-    overflow-y: hidden;
-    border: 1px solid #333;
-    display: flex;
-    flex-direction: column;
-}
-
-.team-blue { border-top: 4px solid var(--blue-team); }
-.team-red { border-top: 4px solid var(--red-team); }
-
-.team-title {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.slot-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-/* SLOT PICK PEMAIN */
-.slot {
-    background: rgba(0,0,0,0.3);
-    height: 60px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    border: 1px dashed #555;
-    transition: all 0.3s;
-}
-
-.slot.filled {
-    border: 1px solid var(--gold);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.slot img, .slot .char-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
-    background: #000;
-}
-
-/* --- UPDATE: BAN SECTION (3 KOTAK) --- */
-/* ... CSS BAGIAN ATAS TETAP SAMA ... */
-
-/* --- UPDATE BAGIAN INI --- */
-
-/* BAN SECTION */
-.ban-section {
-    margin-top: auto;
-    border-top: 1px solid #444;
-    padding-top: 10px;
-}
-
-.ban-label {
-    font-size: 0.7rem;
-    color: #ff8888;
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.team-ban-container {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-}
-
-/* Update Style Slot Ban */
-.team-ban-slot {
-    width: 45px;
-    height: 45px;
-    background: rgba(0, 0, 0, 0.3); /* Default gelap transparan */
-    border: 1px solid #555;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    transition: 0.3s;
-}
-
-.team-ban-slot.filled {
-    border-color: #fff; /* Border putih saat terisi */
-    /* Background akan diatur via JS sesuai warna char */
-}
-
-/* Icon di dalam ban slot (opsional, bisa kita buat agak transparan) */
-.team-ban-slot .ban-icon-text {
-    font-weight: bold;
-    color: white;
-    text-shadow: 1px 1px 2px black;
-    font-size: 1.2rem;
-    z-index: 2;
-}
-
-/* ... CSS SISANYA TETAP SAMA ... */
-.team-ban-slot {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 0, 0, 0.1);
-    border: 1px solid #555;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.team-ban-slot.filled {
-    border-color: #ff4444;
-    background: rgba(255, 0, 0, 0.2);
-}
-
-.team-ban-slot .ban-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 3px;
-    filter: grayscale(100%);
-    opacity: 0.8;
-}
-
-/* SEARCH & GRID */
-
-.universal-ban-area {
-    margin-bottom: 15px;
-    background: #15161c;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px dashed #444;
-}
-
-.ban-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.ban-title { font-size: 0.8rem; color: #888; font-weight: bold; }
-
-#toggle-univ-btn {
-    background: #333;
-    color: white;
-    border: 1px solid #555;
-    padding: 3px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.7rem;
-}
-#toggle-univ-btn.active { background: #ff4444; border-color: red; }
-
-.ban-grid { display: flex; gap: 10px; justify-content: center; }
-.univ-ban-box {
-    width: 40px; height: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px dashed #555; border-radius: 4px;
-    display: flex; justify-content: center; align-items: center;
-    cursor: pointer;
-}
-.univ-ban-box.filled { border: 1px solid #ff4444; background: rgba(255, 0, 0, 0.2); }
-
-.search-bar {
-    width: 100%; 
-    padding: 10px; 
-    margin-bottom: 10px;
-    
-    /* GANTI BAGIAN INI */
-    /* background: #000; <-- HAPUS INI */
-    background: rgba(0, 0, 0, 0.5); /* Hitam transparan */
-    
-    border: 1px solid #444; 
-    color: white; 
-    border-radius: 5px; 
-    box-sizing: border-box;
-}
-
-/* ... CSS LAINNYA BIARKAN SAMA ... */
-
-/* GRID KARAKTER YANG DIPERBAIKI */
-.grid {
-    display: grid;
-    /* Ubah 75px menjadi 100px agar kartu lebih lebar */
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 12px; /* Jarak antar kartu lebih lega */
-    overflow-y: auto;
-    padding: 5px 10px 20px 0; /* Padding kanan untuk scrollbar */
-    flex: 1;
-}
-
-/* KARTU KARAKTER */
-.char-card {
-    background-color: #2a2b36;
-    /* Aspect ratio menjaga bentuk persegi panjang vertikal */
-    aspect-ratio: 3 / 4; 
-    /* Fallback height jika aspect-ratio tidak support di browser lama */
-    min-height: 130px; 
-    border-radius: 8px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid transparent;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-.char-card:hover {
-    transform: translateY(-3px); /* Efek naik sedikit saat hover */
-    border-color: var(--gold);
-    box-shadow: 0 8px 12px rgba(0,0,0,0.5);
-    z-index: 2;
-}
-
-/* NAMA KARAKTER */
-.char-name {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Lebih gelap agar teks jelas */
-    font-size: 0.75rem; /* Ukuran font pas */
-    font-weight: 600;
-    text-align: center;
-    padding: 6px 2px;
-    white-space: nowrap; /* Mencegah nama panjang turun baris */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Tambah titik-titik (...) jika nama kepanjangan */
-    color: #eee;
-}
-
-/* HURUF INISIAL (BACKGROUND WARNA) */
-.char-initial {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 800;
-    font-size: 2.5rem; /* Huruf inisial lebih besar */
-    color: rgba(255, 255, 255, 0.3); /* Transparan agar tidak tabrakan */
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-}
-
-/* ... CSS LAINNYA BIARKAN SAMA ... */
-.char-name {
-    position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.8);
-    font-size: 0.6rem; text-align: center; padding: 2px 0;
-}
-
-.char-card.picked { filter: grayscale(100%); opacity: 0.3; pointer-events: none; }
-.char-card.banned { filter: grayscale(100%) brightness(0.4); opacity: 0.4; pointer-events: none; }
-
-.active-blue { box-shadow: 0 0 20px rgba(74, 144, 226, 0.3); border-color: var(--blue-team); }
-.active-red { box-shadow: 0 0 20px rgba(226, 74, 74, 0.3); border-color: var(--red-team); }
-
-/* ... CSS SEBELUMNYA TETAP SAMA ... */
-
-/* TAMBAHAN: OVERLAY START */
+/* --- OVERLAY START GAME --- */
 #start-overlay {
     position: fixed;
     top: 0;
@@ -440,7 +48,7 @@ h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2p
     border: 2px solid var(--gold);
     padding: 40px;
     border-radius: 10px;
-    background: var(--panel-bg);
+    background: rgba(29, 30, 38, 0.9);
     box-shadow: 0 0 50px rgba(212, 177, 104, 0.2);
 }
 
@@ -472,3 +80,343 @@ h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2p
 .game-started #start-overlay {
     display: none;
 }
+
+/* --- HEADER & TIMER --- */
+header {
+    text-align: center;
+    padding: 10px;
+    background: transparent; /* Transparan agar BG terlihat */
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
+
+#timer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#timer-container {
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(212, 177, 104, 0.5);
+    transition: 0.3s;
+}
+
+#timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+}
+
+#timer-container span {
+    font-size: 0.6rem;
+    color: #ccc;
+}
+
+#start-timer-btn {
+    background: linear-gradient(45deg, #28a745, #218838);
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.1s;
+}
+
+#start-timer-btn:active { transform: scale(0.95); }
+#start-timer-btn:disabled { background: #444; color: #888; cursor: not-allowed; box-shadow: none; }
+
+#status-bar {
+    padding: 5px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    min-width: 300px;
+    border: 1px solid #555;
+}
+
+/* --- LAYOUT UTAMA --- */
+.arena {
+    display: flex;
+    flex: 1;
+    padding: 10px 20px 20px 20px;
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* PANEL TIM (Kiri & Kanan) */
+.team-panel {
+    flex: 1;
+    /* Transparan Gelap agar tulisan terbaca */
+    background-color: rgba(29, 30, 38, 0.6); 
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.team-blue { border-top: 4px solid var(--blue-team); }
+.team-red { border-top: 4px solid var(--red-team); }
+
+.team-title {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* SLOT PICK */
+.slot-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.slot {
+    background: rgba(0,0,0,0.5);
+    height: 60px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border: 1px dashed #555;
+    transition: all 0.3s;
+}
+
+.slot.filled {
+    border: 1px solid var(--gold);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.slot img, .slot .char-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    background: #000;
+}
+
+/* SLOT BAN TIM */
+.ban-section {
+    margin-top: auto;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+}
+
+.ban-label {
+    font-size: 0.7rem;
+    color: #ff8888;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.team-ban-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.team-ban-slot {
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #555;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    transition: 0.3s;
+}
+
+.team-ban-slot.filled {
+    border-color: #fff;
+    /* Background diatur JS */
+}
+
+.team-ban-slot .ban-icon-text {
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+/* --- HERO POOL (Tengah) --- */
+.hero-pool {
+    flex: 2;
+    background-color: rgba(29, 30, 38, 0.6); /* Transparan */
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Universal Ban & Search */
+.universal-ban-area {
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px dashed #444;
+}
+
+.ban-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.ban-title { font-size: 0.8rem; color: #ccc; font-weight: bold; }
+
+#toggle-univ-btn {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+#toggle-univ-btn.active { background: #ff4444; border-color: red; }
+
+.ban-grid { display: flex; gap: 10px; justify-content: center; }
+.univ-ban-box {
+    width: 40px; height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed #555; border-radius: 4px;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+}
+.univ-ban-box.filled { border: 1px solid #ff4444; background: rgba(255, 0, 0, 0.2); }
+
+.search-bar {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #444; 
+    color: white; 
+    border-radius: 5px; 
+    box-sizing: border-box;
+}
+
+/* --- GRID KARAKTER (FIX TABRAKAN) --- */
+.grid {
+    display: grid;
+    /* Grid Responsif */
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    /* Baris Otomatis mengikuti konten agar tidak tumpang tindih */
+    grid-auto-rows: max-content;
+    
+    gap: 15px;
+    padding: 10px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+/* KARTU */
+.char-card {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    height: auto; /* Biarkan tinggi menyesuaikan rasio */
+    
+    background-color: #2a2b36;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.char-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 5;
+}
+
+/* State Visual */
+.char-card.picked { filter: grayscale(100%); opacity: 0.4; pointer-events: none; }
+.char-card.banned-opponent { filter: grayscale(100%); opacity: 0.2; pointer-events: none; border: 1px solid red; }
+
+/* Inisial Huruf */
+.char-initial {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.2);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+/* Gambar Karakter (Jika ada) */
+.char-card img.char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+}
+
+/* NAMA KARAKTER (Selalu Muncul) */
+.char-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+    background: rgba(0, 0, 0, 0.8); /* Gelap transparan */
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 4px 2px;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 10;
+}
+
+/* Highlight Tim Aktif */
+.active-blue { box-shadow: 0 0 20px rgba(74, 144, 226, 0.3); border-color: var(--blue-team); }
+.active-red { box-shadow: 0 0 20px rgba(226, 74, 74, 0.3); border-color: var(--red-team); }
+
+/* Universal Mode Style */
+body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }

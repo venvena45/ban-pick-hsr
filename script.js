@@ -1,4 +1,4 @@
-// --- DATA KARAKTER ---
+// --- DATA KARAKTER LENGKAP ---
 // Warna disesuaikan dengan Elemen (Combat Type)
 const ELEMENT_COLORS = {
     Physical:   '#9e9e9e', // Abu-abu
@@ -6,29 +6,32 @@ const ELEMENT_COLORS = {
     Ice:        '#4facfe', // Biru Muda
     Lightning:  '#d580ff', // Ungu Terang
     Wind:       '#5cdb95', // Hijau
-    Quantum:    '#6a5acd', // Ungu Gelap (SlateBlue)
-    Imaginary:  '#f1c40f'  // Emas/Kuning
+    Quantum:    '#6a5acd', // Ungu Gelap
+    Imaginary:  '#f1c40f'  // Emas
 };
 
 const characters = [
-    { id: 'acheron', name: 'Acheron', path: 'Nihility', color: ELEMENT_COLORS.Lightning },
-    { id: 'aglaea', name: 'Aglaea', path: 'Remembrance', color: ELEMENT_COLORS.Lightning },
-    { id: 'anaxa', name: 'Anaxa', path: 'Erudition', color: ELEMENT_COLORS.Wind },
-    { id: 'archer', name: 'Archer', path: 'The Hunt', color: ELEMENT_COLORS.Quantum },
-    { id: 'argenti', name: 'Argenti', path: 'Erudition', color: ELEMENT_COLORS.Physical },
+    // 15 Karakter PERTAMA dengan LINK GAMBAR yang Anda berikan
+    { id: 'acheron', name: 'Acheron', path: 'Nihility', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/24/Character_Acheron_Icon.png/revision/latest?cb=20240605043757' },
+    { id: 'aglaea', name: 'Aglaea', path: 'Remembrance', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/f8/Character_Aglaea_Icon.png/revision/latest?cb=20250101123357' },
+    { id: 'anaxa', name: 'Anaxa', path: 'Erudition', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/f0/Character_Anaxa_Icon.png/revision/latest?cb=20250328124329' },
+    { id: 'archer', name: 'Archer', path: 'The Hunt', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/8f/Character_Archer_Icon.png/revision/latest?cb=20250620124531' },
+    { id: 'argenti', name: 'Argenti', path: 'Erudition', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c0/Character_Argenti_Icon.png/revision/latest?cb=20231209093828' },
+    { id: 'aventurine', name: 'Aventurine', path: 'Preservation', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/d/da/Character_Aventurine_Icon.png/revision/latest?cb=20240327022115' },
+    { id: 'bailu', name: 'Bailu', path: 'Abundance', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/47/Character_Bailu_Icon.png/revision/latest?cb=20230723080553' },
+    { id: 'blackswan', name: 'Black Swan', path: 'Nihility', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/90/Character_Black_Swan_Icon.png/revision/latest?cb=20240206104620' },
+    { id: 'blade', name: 'Blade', path: 'Destruction', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/90/Character_Blade_Icon.png/revision/latest?cb=20230723080612' },
+    { id: 'boothill', name: 'Boothill', path: 'The Hunt', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/78/Character_Boothill_Icon.png/revision/latest?cb=20240525031219' },
+    { id: 'bronya', name: 'Bronya', path: 'Harmony', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/0/0f/Character_Bronya_Icon.png/revision/latest?cb=20230723080648' },
+    { id: 'castorice', name: 'Castorice', path: 'Remembrance', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/d/da/Character_Castorice_Icon.png/revision/latest?cb=20250328124417' },
+    { id: 'cerydra', name: 'Cerydra', path: 'Harmony', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c9/Character_Cerydra_Icon.png/revision/latest?cb=20250802130229' },
+    { id: 'cipher', name: 'Cipher', path: 'Nihility', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Cipher_Icon.png/revision/latest?cb=20250509121146' },
+    { id: 'cyrene', name: 'Cyrene', path: 'Remembrance', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Cyrene_Icon.png/revision/latest?cb=20251024130639' },
+
+    // SISA KARAKTER (Tanpa Link Gambar, akan pakai Inisial Warna)
     { id: 'arlan', name: 'Arlan', path: 'Destruction', color: ELEMENT_COLORS.Lightning },
     { id: 'asta', name: 'Asta', path: 'Harmony', color: ELEMENT_COLORS.Fire },
-    { id: 'aventurine', name: 'Aventurine', path: 'Preservation', color: ELEMENT_COLORS.Imaginary },
-    { id: 'bailu', name: 'Bailu', path: 'Abundance', color: ELEMENT_COLORS.Lightning },
-    { id: 'blackswan', name: 'Black Swan', path: 'Nihility', color: ELEMENT_COLORS.Wind },
-    { id: 'blade', name: 'Blade', path: 'Destruction', color: ELEMENT_COLORS.Wind },
-    { id: 'boothill', name: 'Boothill', path: 'The Hunt', color: ELEMENT_COLORS.Physical },
-    { id: 'bronya', name: 'Bronya', path: 'Harmony', color: ELEMENT_COLORS.Wind },
-    { id: 'castorice', name: 'Castorice', path: 'Remembrance', color: ELEMENT_COLORS.Quantum },
-    { id: 'cerydra', name: 'Cerydra', path: 'Harmony', color: ELEMENT_COLORS.Wind },
-    { id: 'cipher', name: 'Cipher', path: 'Nihility', color: ELEMENT_COLORS.Quantum },
     { id: 'clara', name: 'Clara', path: 'Destruction', color: ELEMENT_COLORS.Physical },
-    { id: 'cyrene', name: 'Cyrene', path: 'Remembrance', color: ELEMENT_COLORS.Ice },
     { id: 'danheng', name: 'Dan Heng', path: 'The Hunt', color: ELEMENT_COLORS.Wind },
     { id: 'dhil', name: 'Dan Heng IL', path: 'Destruction', color: ELEMENT_COLORS.Imaginary },
     { id: 'dhpt', name: 'Dan Heng PT', path: 'Preservation', color: ELEMENT_COLORS.Physical },
@@ -93,20 +96,20 @@ const characters = [
     { id: 'yunli', name: 'Yunli', path: 'Destruction', color: ELEMENT_COLORS.Physical }
 ];
 
+// --- FLOW DRAFT ---
 const draftFlow = [
-    // NODE 1
     { type: 'ban', team: 'blue', text: "NODE 1: BLUE BAN" },
     { type: 'ban', team: 'red',  text: "NODE 1: RED BAN" },
     { type: 'pick', team: 'blue', text: "NODE 1: BLUE PICK" },
     { type: 'pick', team: 'red',  text: "NODE 1: RED PICK" },
-    // NODE 2
+    
     { type: 'ban', team: 'blue', text: "NODE 2: BLUE BAN" },
     { type: 'ban', team: 'red',  text: "NODE 2: RED BAN" },
     { type: 'pick', team: 'red',  text: "NODE 2: RED PICK (1/2)" },
     { type: 'pick', team: 'red',  text: "NODE 2: RED PICK (2/2)" },
     { type: 'pick', team: 'blue', text: "NODE 2: BLUE PICK (1/2)" },
     { type: 'pick', team: 'blue', text: "NODE 2: BLUE PICK (2/2)" },
-    // NODE 3
+    
     { type: 'ban', team: 'blue', text: "NODE 3: BLUE BAN" },
     { type: 'ban', team: 'red',  text: "NODE 3: RED BAN" },
     { type: 'pick', team: 'blue', text: "NODE 3: BLUE PICK" },
@@ -115,11 +118,9 @@ const draftFlow = [
 
 let currentStep = 0;
 
-// LOGIKA BARU: Split Picked Sets
-let bluePicks = new Set();      // Karakter yang dipick Blue
-let redPicks = new Set();       // Karakter yang dipick Red
-// pickedChars GLOBAL DIHAPUS agar mirror match bisa terjadi
-
+// STATE SETS
+let bluePicks = new Set();
+let redPicks = new Set();
 let univBanSet = new Set();
 let blueBanSet = new Set();
 let redBanSet = new Set();
@@ -131,9 +132,9 @@ let timerInterval;
 function init() {
     renderSlots();
     renderGrid(characters);
-    // Overlay Start Game logic handle separately
 }
 
+// --- TIMER & GAME START ---
 function startGame() {
     document.body.classList.add('game-started');
     updateStatus();
@@ -178,30 +179,22 @@ function autoPickRandom() {
 
 // --- LOGIKA UTAMA: MIRROR MATCH ALLOWED ---
 function isCharAvailable(charId, team, phaseType) {
-    // 1. Universal Ban berlaku untuk semua
     if (univBanSet.has(charId)) return false;
 
     if (phaseType === 'pick') {
-        // Cek Ban Lawan
         if (team === 'blue' && redBanSet.has(charId)) return false;
         if (team === 'red' && blueBanSet.has(charId)) return false;
-
-        // Cek Duplicate Tim Sendiri (Satu tim gaboleh 2 char sama)
+        
+        // No duplicate in same team
         if (team === 'blue' && bluePicks.has(charId)) return false;
         if (team === 'red' && redPicks.has(charId)) return false;
 
-        // CATATAN: Kita TIDAK mengecek tim lawan. 
-        // Jadi kalau Red sudah pick Kafka, Blue MASIH BISA pick Kafka (Mirror).
         return true; 
     }
 
     if (phaseType === 'ban') {
-        // Tidak bisa ban karakter yang SUDAH dipick siapapun (opsional, biasanya begitu)
         if (bluePicks.has(charId) || redPicks.has(charId)) return false;
-        
-        // Tidak bisa ban karakter yang sudah diban (Double ban useless)
         if (blueBanSet.has(charId) || redBanSet.has(charId)) return false;
-
         return true;
     }
     return false;
@@ -218,7 +211,7 @@ function handleCharClick(char) {
     const currentPhase = draftFlow[currentStep];
 
     if (!isCharAvailable(char.id, currentPhase.team, currentPhase.type)) {
-        alert("Karakter tidak tersedia (Sudah dipick timmu, diban, atau slot penuh)!");
+        alert("Karakter tidak tersedia!");
         return;
     }
 
@@ -228,10 +221,8 @@ function handleCharClick(char) {
         else redBanSet.add(char.id);
         fillBanSlot(currentPhase.team, char);
     } else {
-        // Masukkan ke set tim masing-masing
         if (currentPhase.team === 'blue') bluePicks.add(char.id);
         else redPicks.add(char.id);
-        
         fillPickSlot(currentPhase.team, char);
     }
 
@@ -273,6 +264,7 @@ function renderSlots() {
         redBans.innerHTML += `<div class="team-ban-slot" id="red-ban-${i}"></div>`;
     }
 }
+
 function renderGrid(chars) {
     const grid = document.getElementById('char-grid');
     grid.innerHTML = '';
@@ -289,9 +281,12 @@ function renderGrid(chars) {
         // --- VISUAL LOGIC ---
         let isUnavailable = false;
         if (univBanSet.has(char.id)) isUnavailable = true;
+        
+        // Gelap jika sudah dipick tim sendiri
         if (activeTeam === 'blue' && bluePicks.has(char.id)) isUnavailable = true;
         if (activeTeam === 'red' && redPicks.has(char.id)) isUnavailable = true;
 
+        // Gelap jika diban lawan (khusus fase Pick)
         if (isPickPhase) {
             if (activeTeam === 'blue' && redBanSet.has(char.id)) isUnavailable = true;
             if (activeTeam === 'red' && blueBanSet.has(char.id)) isUnavailable = true;
@@ -299,7 +294,7 @@ function renderGrid(chars) {
 
         if (isUnavailable) el.classList.add('picked');
 
-        // Badge Visual
+        // BADGES
         let badge = '';
         if (blueBanSet.has(char.id)) badge += '<div style="position:absolute; top:0; left:0; background:blue; color:white; font-size:9px; padding:3px 6px; border-bottom-right-radius:5px; z-index:10;">BAN</div>';
         if (redBanSet.has(char.id)) badge += '<div style="position:absolute; top:0; right:0; background:red; color:white; font-size:9px; padding:3px 6px; border-bottom-left-radius:5px; z-index:10;">BAN</div>';
@@ -307,13 +302,19 @@ function renderGrid(chars) {
         if (bluePicks.has(char.id)) badge += '<div style="position:absolute; top:5px; right:5px; width:12px; height:12px; background:var(--blue-team); border-radius:50%; border:2px solid white; box-shadow:0 0 5px blue; z-index:10;"></div>';
         if (redPicks.has(char.id)) badge += '<div style="position:absolute; top:5px; left:5px; width:12px; height:12px; background:var(--red-team); border-radius:50%; border:2px solid white; box-shadow:0 0 5px red; z-index:10;"></div>';
 
-        // --- UPDATE BAGIAN HTML INI ---
-        // Saya menambahkan class "char-initial" dan memisahkan styling background
+        // --- IMAGE vs INITIAL ---
+        // Jika ada link gambar (char.img), pakai itu. Jika tidak, pakai placeholder warna.
+        const imageSrc = char.img ? char.img : `images/${char.id}.jpg`;
+        
         el.innerHTML = `
             ${badge}
-            <div class="char-initial" style="background:${char.color};">
+            <img src="${imageSrc}" class="char-img" alt="${char.name}" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            
+            <div class="char-initial" style="background:${char.color}; display:none;">
                 ${char.name.charAt(0)}
             </div>
+
             <div class="char-name">${char.name}</div>
         `;
         
@@ -322,19 +323,21 @@ function renderGrid(chars) {
     });
 }
 
-// --- UPDATE FUNGSI WARNA BAN ---
 function fillBanSlot(team, char) {
     for (let i = 0; i < 3; i++) {
         const slot = document.getElementById(`${team}-ban-${i}`);
         if (!slot.classList.contains('filled')) {
             slot.classList.add('filled');
-            
-            // LOGIKA WARNA: Ubah background slot jadi warna karakter
             slot.style.backgroundColor = char.color;
             slot.style.borderColor = char.color;
-            slot.style.boxShadow = `0 0 10px ${char.color}`; // Efek glow
+            slot.style.boxShadow = `0 0 10px ${char.color}`;
             
-            slot.innerHTML = `<span class="ban-icon-text">${char.name.charAt(0)}</span>`;
+            // Tampilkan icon kecil jika ada gambar, atau teks
+            if(char.img) {
+                slot.innerHTML = `<img src="${char.img}" style="width:100%; height:100%; object-fit:cover;">`;
+            } else {
+                slot.innerHTML = `<span class="ban-icon-text">${char.name.charAt(0)}</span>`;
+            }
             break;
         }
     }
@@ -344,8 +347,14 @@ function fillPickSlot(team, char) {
     for (let i = 0; i < 4; i++) {
         const slot = document.getElementById(`${team}-slot-${i}`);
         if (slot.innerHTML === "Slot Kosong") {
+            // Icon kecil di slot pick
+            let iconHtml = `<div style="width:30px; height:30px; border-radius:50%; background:${char.color}; margin-right:10px; border:2px solid white;"></div>`;
+            if (char.img) {
+                iconHtml = `<img src="${char.img}" style="width:35px; height:35px; border-radius:50%; margin-right:10px; border:2px solid white; object-fit:cover;">`;
+            }
+
             slot.innerHTML = `
-                <div style="width:30px; height:30px; border-radius:50%; background:${char.color}; margin-right:10px; border:2px solid white;"></div>
+                ${iconHtml}
                 <span>${char.name}</span>
             `;
             slot.classList.add('filled');
