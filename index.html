@@ -16,26 +16,32 @@
 <div class="arena">
     <div class="team-panel team-blue" id="blue-panel">
         <div class="team-title">BLUE TEAM</div>
-        <div class="slot-container" id="blue-slots">
-            </div>
+        <div class="slot-container" id="blue-slots"></div>
         <div class="ban-section">
-            <div class="team-title" style="font-size: 0.9rem;">BANNED</div>
+            <div class="ban-label">BANNED</div>
             <div id="blue-ban-slot" class="ban-slot">Empty</div>
         </div>
     </div>
 
     <div class="hero-pool">
-        <input type="text" class="search-bar" placeholder="Cari Karakter..." onkeyup="filterChars(this.value)">
-        <div class="grid" id="char-grid">
+        <div class="universal-ban-area">
+            <div class="ban-header">
+                <span class="ban-title">UNIVERSAL BAN (OPSIONAL)</span>
+                <button id="toggle-univ-btn" onclick="toggleUniversalMode()">MODE: OFF</button>
             </div>
+            <div class="ban-grid" id="univ-ban-slots">
+                </div>
+        </div>
+
+        <input type="text" class="search-bar" placeholder="Cari Karakter..." onkeyup="filterChars(this.value)">
+        <div class="grid" id="char-grid"></div>
     </div>
 
     <div class="team-panel team-red" id="red-panel">
         <div class="team-title">RED TEAM</div>
-        <div class="slot-container" id="red-slots">
-            </div>
+        <div class="slot-container" id="red-slots"></div>
         <div class="ban-section">
-            <div class="team-title" style="font-size: 0.9rem;">BANNED</div>
+            <div class="ban-label">BANNED</div>
             <div id="red-ban-slot" class="ban-slot">Empty</div>
         </div>
     </div>
