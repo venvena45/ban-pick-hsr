@@ -4,28 +4,76 @@
     <meta charset="UTF-8">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSR Tournament Draft Simulator</title>
+    <title>HSR KOMPE BANG</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="start-overlay">
     <div class="overlay-content">
-        <h1>HSR KOK KOMPE</h1>
-        <p>Mode: 3 Node Ban & Pick</p>
+        <h1>HSR KOMPE</h1>
+        <p>YANG CUPU GAUSAH MAIN</p>
         <button onclick="startGame()">MULAI DRAFT</button>
+    </div>
+</div>
+<div id="result-overlay" style="display: none;">
+    <div class="result-content">
+        <h1 style="color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 10px var(--gold);">TIM SABUNG HSR</h1>
+        
+        <div class="result-container">
+            <div class="result-team-box blue">
+                <h2 style="color: var(--blue-team); border-bottom: 1px solid #555; padding-bottom:5px;">BLUE TEAM</h2>
+                
+                <div class="result-phase-block">
+                    <span class="res-phase-label">PHASE 1 TEAM</span>
+                    <div class="result-grid" id="final-blue-p1"></div>
+                </div>
+
+                <div class="result-phase-block">
+                    <span class="res-phase-label">PHASE 2 TEAM</span>
+                    <div class="result-grid" id="final-blue-p2"></div>
+                </div>
+            </div>
+
+            <div class="result-team-box red">
+                <h2 style="color: var(--red-team); border-bottom: 1px solid #555; padding-bottom:5px;">RED TEAM</h2>
+                
+                <div class="result-phase-block">
+                    <span class="res-phase-label">PHASE 1 TEAM</span>
+                    <div class="result-grid" id="final-red-p1"></div>
+                </div>
+
+                <div class="result-phase-block">
+                    <span class="res-phase-label">PHASE 2 TEAM</span>
+                    <div class="result-grid" id="final-red-p2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-bans-box">
+            <h4>BANNED CHARACTERS</h4>
+            <div class="result-ban-row" id="final-bans"></div>
+        </div>
+
+        <button onclick="location.reload()" class="result-btn">KOMPE LAGI</button>
+    </div>
+</div>
     </div>
 </div>
 
 <header>
-    <h1>HSR Kok Kompe</h1>
+    <h1>HSR Turnbase Kompe</h1>
     
     <div id="timer-wrapper">
         <div id="timer-container">
             <div id="timer">30</div>
             <span>DETIK</span>
         </div>
-        <div id="timer-status" style="font-size: 0.8rem; color: #888; margin-top: 5px;">PAUSED</div>
+        <div class="timer-controls">
+            <button id="pause-btn" onclick="togglePauseTimer()">START</button>
+            <button id="reset-btn" onclick="resetDraft()">RESET</button>
+            <div id="timer-status">READY</div>
+        </div>
     </div>
 
     <div id="status-bar">Menunggu Start...</div>
@@ -33,11 +81,24 @@
 
 <div class="arena">
     <div class="team-panel team-blue" id="blue-panel">
-        <div class="team-title">BLUE TEAM</div>
-        <div class="slot-container" id="blue-slots"></div>
+        <div class="team-title" id="blue-title">BLUE TEAM - PHASE 1</div>
+        
+        <div id="blue-p1-history" class="phase-history hidden">
+            <div class="history-section">
+                <div class="history-label">PHASE 1 PICKS</div>
+                <div class="history-row" id="blue-p1-slots"></div>
+            </div>
+            <div class="history-section">
+                <div class="history-label">PHASE 1 BANS</div>
+                <div class="history-row" id="blue-p1-bans"></div>
+            </div>
+        </div>
+
+        <div class="slot-container" id="blue-active-slots"></div>
+        
         <div class="ban-section">
-            <div class="ban-label">BLUE BANS (Saved)</div>
-            <div class="team-ban-container" id="blue-bans"></div>
+            <div class="ban-label" id="blue-ban-label">BANS (PHASE 1)</div>
+            <div class="team-ban-container" id="blue-active-bans"></div>
         </div>
     </div>
 
@@ -49,17 +110,29 @@
             </div>
             <div class="ban-grid" id="univ-ban-slots"></div>
         </div>
-
         <input type="text" class="search-bar" placeholder="Cari Karakter..." onkeyup="filterChars(this.value)">
         <div class="grid" id="char-grid"></div>
     </div>
 
     <div class="team-panel team-red" id="red-panel">
-        <div class="team-title">RED TEAM</div>
-        <div class="slot-container" id="red-slots"></div>
+        <div class="team-title" id="red-title">RED TEAM - PHASE 1</div>
+
+        <div id="red-p1-history" class="phase-history hidden">
+            <div class="history-section">
+                <div class="history-label">PHASE 1 PICKS</div>
+                <div class="history-row" id="red-p1-slots"></div>
+            </div>
+            <div class="history-section">
+                <div class="history-label">PHASE 1 BANS</div>
+                <div class="history-row" id="red-p1-bans"></div>
+            </div>
+        </div>
+
+        <div class="slot-container" id="red-active-slots"></div>
+        
         <div class="ban-section">
-            <div class="ban-label">RED BANS (Saved)</div>
-            <div class="team-ban-container" id="red-bans"></div>
+            <div class="ban-label" id="red-ban-label">BANS (PHASE 1)</div>
+            <div class="team-ban-container" id="red-active-bans"></div>
         </div>
     </div>
 </div>

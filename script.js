@@ -1,5 +1,4 @@
-// --- DATA KARAKTER LENGKAP ---
-// Warna disesuaikan dengan Elemen (Combat Type)
+// --- DATA KARAKTER LENGKAP (80+ CHARACTERS) ---
 const ELEMENT_COLORS = {
     Physical:   '#9e9e9e', // Abu-abu
     Fire:       '#ff4d4d', // Merah
@@ -7,11 +6,11 @@ const ELEMENT_COLORS = {
     Lightning:  '#d580ff', // Ungu Terang
     Wind:       '#5cdb95', // Hijau
     Quantum:    '#6a5acd', // Ungu Gelap
-    Imaginary:  '#f1c40f'  // Emas
+    Imaginary:  '#f1c40f'  // Emas/Kuning
 };
 
 const characters = [
-    // 15 Karakter PERTAMA dengan LINK GAMBAR yang Anda berikan
+    // --- 5 STAR CHARACTERS ---
     { id: 'acheron', name: 'Acheron', path: 'Nihility', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/24/Character_Acheron_Icon.png/revision/latest?cb=20240605043757' },
     { id: 'aglaea', name: 'Aglaea', path: 'Remembrance', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/f8/Character_Aglaea_Icon.png/revision/latest?cb=20250101123357' },
     { id: 'anaxa', name: 'Anaxa', path: 'Erudition', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/f0/Character_Anaxa_Icon.png/revision/latest?cb=20250328124329' },
@@ -26,143 +25,175 @@ const characters = [
     { id: 'castorice', name: 'Castorice', path: 'Remembrance', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/d/da/Character_Castorice_Icon.png/revision/latest?cb=20250328124417' },
     { id: 'cerydra', name: 'Cerydra', path: 'Harmony', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c9/Character_Cerydra_Icon.png/revision/latest?cb=20250802130229' },
     { id: 'cipher', name: 'Cipher', path: 'Nihility', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Cipher_Icon.png/revision/latest?cb=20250509121146' },
+    { id: 'clara', name: 'Clara', path: 'Destruction', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/a/a4/Character_Clara_Icon.png/revision/latest?cb=20230723080716' },
     { id: 'cyrene', name: 'Cyrene', path: 'Remembrance', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Cyrene_Icon.png/revision/latest?cb=20251024130639' },
+    { id: 'dhil', name: 'Dan Heng IL', path: 'Destruction', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/2a/Character_Dan_Heng_%E2%80%A2_Imbibitor_Lunae_Icon.png/revision/latest?cb=20240326111321' },
+    { id: 'dhpt', name: 'Dan Heng PT', path: 'Preservation', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/fc/Character_Dan_Heng_%E2%80%A2_Permansor_Terrae_Icon.png/revision/latest?cb=20250912121518' },
+    { id: 'ratio', name: 'Dr. Ratio', path: 'The Hunt', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/47/Character_Dr._Ratio_Icon.png/revision/latest?cb=20231227130912' },
+    { id: 'evernight', name: 'Evernight', path: 'Remembrance', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/b/b7/Character_Evernight_Icon.png/revision/latest?cb=20250912121500' },
+    { id: 'feixiao', name: 'Feixiao', path: 'The Hunt', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/75/Character_Feixiao_Icon.png/revision/latest?cb=20240910182925' },
+    { id: 'firefly', name: 'Firefly', path: 'Destruction', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/9e/Character_Firefly_Icon.png/revision/latest?cb=20240619072408' },
+    { id: 'fuxuan', name: 'Fu Xuan', path: 'Preservation', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/1a/Character_Fu_Xuan_Icon.png/revision/latest?cb=20230723080902' },
+    { id: 'fugue', name: 'Fugue', path: 'Nihility', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c0/Character_Fugue_Icon.png/revision/latest?cb=20241122131000' },
+    { id: 'gepard', name: 'Gepard', path: 'Preservation', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/75/Character_Gepard_Icon.png/revision/latest?cb=20230723080948' },
+    { id: 'himeko', name: 'Himeko', path: 'Erudition', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/0/00/Character_Himeko_Icon.png/revision/latest?cb=20230723081029' },
+    { id: 'huohuo', name: 'Huohuo', path: 'Abundance', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/6/68/Character_Huohuo_Icon.png/revision/latest?cb=20231209094156' },
+    { id: 'hyacine', name: 'Hyacine', path: 'Remembrance', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c0/Character_Hyacine_Icon.png/revision/latest?cb=20250509121044' },
+    { id: 'hysilens', name: 'Hysilens', path: 'Nihility', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/19/Character_Hysilens_Icon.png/revision/latest?cb=20250802130317' },
+    { id: 'jade', name: 'Jade', path: 'Erudition', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/fd/Character_Jade_Icon.png/revision/latest?cb=20240619072848' },
+    { id: 'jiaoqiu', name: 'Jiaoqiu', path: 'Nihility', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/48/Character_Jiaoqiu_Icon.png/revision/latest?cb=20240910182738' },
+    { id: 'jingyuan', name: 'Jing Yuan', path: 'Erudition', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/88/Character_Jing_Yuan_Icon.png/revision/latest?cb=20230723081207' },
+    { id: 'jingliu', name: 'Jingliu', path: 'Destruction', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/f9/Character_Jingliu_Icon.png/revision/latest?cb=20230723081213' },
+    { id: 'kafka', name: 'Kafka', path: 'Nihility', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/8c/Character_Kafka_Icon.png/revision/latest?cb=20230723081234' },
+    { id: 'lingsha', name: 'Lingsha', path: 'Abundance', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/a/ab/Character_Lingsha_Icon.png/revision/latest?cb=20240719042259' },
+    { id: 'luocha', name: 'Luocha', path: 'Abundance', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/20/Character_Luocha_Icon.png/revision/latest?cb=20230723081416' },
+    { id: 'mydei', name: 'Mydei', path: 'Destruction', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/89/Character_Mydei_Icon.png/revision/latest?cb=20250214124624' },
+    { id: 'phainon', name: 'Phainon', path: 'Destruction', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/e/ef/Character_Phainon_Icon.png/revision/latest?cb=20250620124711' },
+    { id: 'rappa', name: 'Rappa', path: 'Erudition', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/84/Character_Rappa_Icon.png/revision/latest?cb=20240827130309' },
+    { id: 'robin', name: 'Robin', path: 'Harmony', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/72/Character_Robin_Icon.png/revision/latest?cb=20240525031318' },
+    { id: 'ruanmei', name: 'Ruan Mei', path: 'Harmony', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/16/Character_Ruan_Mei_Icon.png/revision/latest?cb=20231227130539' },
+    { id: 'saber', name: 'Saber', path: 'Destruction', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/43/Character_Saber_Icon.png/revision/latest?cb=20250620124608' },
+    { id: 'seele', name: 'Seele', path: 'The Hunt', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/9a/Character_Seele_Icon.png/revision/latest?cb=20230723081718' },
+    { id: 'silverwolf', name: 'Silver Wolf', path: 'Nihility', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/a/a3/Character_Silver_Wolf_Icon.png/revision/latest?cb=20230723081754' },
+    { id: 'sparkle', name: 'Sparkle', path: 'Harmony', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/6/6b/Character_Sparkle_Icon.png/revision/latest?cb=20240326110835' },
+    { id: 'sunday', name: 'Sunday', path: 'Harmony', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/3/38/Character_Sunday_Icon.png/revision/latest?cb=20241122130945' },
+    { id: 'thedahlia', name: 'The Dahlia', path: 'Nihility', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/71/Character_The_Dahlia_Icon.png/revision/latest?cb=20251205121527' }, // Fallback icon (No URL yet)
+    { id: 'theherta', name: 'The Herta', path: 'Erudition', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/3/39/Character_The_Herta_Icon.png/revision/latest?cb=20250101123319' },
+    { id: 'topaz', name: 'Topaz & Numby', path: 'The Hunt', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/89/Character_Topaz_%26_Numby_Icon.png/revision/latest?cb=20231030000030' },
+    { id: 'tb_phys', name: 'MC (Physical)', path: 'Destruction', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/8/89/Character_Trailblazer_%28Destruction%29_Icon.png/revision/latest?cb=20240326135926' },
+    { id: 'tb_fire', name: 'MC (Fire)', path: 'Preservation', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c3/Character_Trailblazer_%28Preservation%29_Icon.png/revision/latest?cb=20240326131619' },
+    { id: 'tb_imag', name: 'MC (Harmony)', path: 'Harmony', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/fd/Character_Trailblazer_%28Harmony%29_Icon.png/revision/latest?cb=20240525030520' },
+    { id: 'tb_rem', name: 'MC (Remembrance)', path: 'Remembrance', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/43/Character_Trailblazer_%28Remembrance%29_Icon.png/revision/latest?cb=20241123044918' },
+    { id: 'tribbie', name: 'Tribbie', path: 'Harmony', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/f/f3/Character_Tribbie_Icon.png/revision/latest?cb=20250214124656' },
+    { id: 'welt', name: 'Welt', path: 'Nihility', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/11/Character_Welt_Icon.png/revision/latest?cb=20230723082022' },
+    { id: 'yanqing', name: 'Yanqing', path: 'The Hunt', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/5/57/Character_Yanqing_Icon.png/revision/latest?cb=20230723082139' },
+    { id: 'yunli', name: 'Yunli', path: 'Destruction', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/43/Character_Yunli_Icon.png/revision/latest?cb=20240724122212' },
 
-    // SISA KARAKTER (Tanpa Link Gambar, akan pakai Inisial Warna)
-    { id: 'arlan', name: 'Arlan', path: 'Destruction', color: ELEMENT_COLORS.Lightning },
-    { id: 'asta', name: 'Asta', path: 'Harmony', color: ELEMENT_COLORS.Fire },
-    { id: 'clara', name: 'Clara', path: 'Destruction', color: ELEMENT_COLORS.Physical },
-    { id: 'danheng', name: 'Dan Heng', path: 'The Hunt', color: ELEMENT_COLORS.Wind },
-    { id: 'dhil', name: 'Dan Heng IL', path: 'Destruction', color: ELEMENT_COLORS.Imaginary },
-    { id: 'dhpt', name: 'Dan Heng PT', path: 'Preservation', color: ELEMENT_COLORS.Physical },
-    { id: 'ratio', name: 'Dr. Ratio', path: 'The Hunt', color: ELEMENT_COLORS.Imaginary },
-    { id: 'evernight', name: 'Evernight', path: 'Remembrance', color: ELEMENT_COLORS.Ice },
-    { id: 'feixiao', name: 'Feixiao', path: 'The Hunt', color: ELEMENT_COLORS.Wind },
-    { id: 'firefly', name: 'Firefly', path: 'Destruction', color: ELEMENT_COLORS.Fire },
-    { id: 'fuxuan', name: 'Fu Xuan', path: 'Preservation', color: ELEMENT_COLORS.Quantum },
-    { id: 'fugue', name: 'Fugue', path: 'Nihility', color: ELEMENT_COLORS.Fire },
-    { id: 'gallagher', name: 'Gallagher', path: 'Abundance', color: ELEMENT_COLORS.Fire },
-    { id: 'gepard', name: 'Gepard', path: 'Preservation', color: ELEMENT_COLORS.Ice },
-    { id: 'guinaifen', name: 'Guinaifen', path: 'Nihility', color: ELEMENT_COLORS.Fire },
-    { id: 'hanya', name: 'Hanya', path: 'Harmony', color: ELEMENT_COLORS.Physical },
-    { id: 'herta', name: 'Herta', path: 'Erudition', color: ELEMENT_COLORS.Ice },
-    { id: 'himeko', name: 'Himeko', path: 'Erudition', color: ELEMENT_COLORS.Fire },
-    { id: 'hook', name: 'Hook', path: 'Destruction', color: ELEMENT_COLORS.Fire },
-    { id: 'huohuo', name: 'Huohuo', path: 'Abundance', color: ELEMENT_COLORS.Wind },
-    { id: 'hyacine', name: 'Hyacine', path: 'Remembrance', color: ELEMENT_COLORS.Wind },
-    { id: 'hysilens', name: 'Hysilens', path: 'Nihility', color: ELEMENT_COLORS.Physical },
-    { id: 'jade', name: 'Jade', path: 'Erudition', color: ELEMENT_COLORS.Quantum },
-    { id: 'jiaoqiu', name: 'Jiaoqiu', path: 'Nihility', color: ELEMENT_COLORS.Fire },
-    { id: 'jingyuan', name: 'Jing Yuan', path: 'Erudition', color: ELEMENT_COLORS.Lightning },
-    { id: 'jingliu', name: 'Jingliu', path: 'Destruction', color: ELEMENT_COLORS.Ice },
-    { id: 'kafka', name: 'Kafka', path: 'Nihility', color: ELEMENT_COLORS.Lightning },
-    { id: 'lingsha', name: 'Lingsha', path: 'Abundance', color: ELEMENT_COLORS.Fire },
-    { id: 'luka', name: 'Luka', path: 'Nihility', color: ELEMENT_COLORS.Physical },
-    { id: 'luocha', name: 'Luocha', path: 'Abundance', color: ELEMENT_COLORS.Imaginary },
-    { id: 'lynx', name: 'Lynx', path: 'Abundance', color: ELEMENT_COLORS.Quantum },
-    { id: 'march7', name: 'March 7th', path: 'Preservation', color: ELEMENT_COLORS.Ice },
-    { id: 'march7hunt', name: 'March 7th (Hunt)', path: 'The Hunt', color: ELEMENT_COLORS.Imaginary },
-    { id: 'misha', name: 'Misha', path: 'Destruction', color: ELEMENT_COLORS.Ice },
-    { id: 'moze', name: 'Moze', path: 'The Hunt', color: ELEMENT_COLORS.Lightning },
-    { id: 'mydei', name: 'Mydei', path: 'Destruction', color: ELEMENT_COLORS.Imaginary },
-    { id: 'natasha', name: 'Natasha', path: 'Abundance', color: ELEMENT_COLORS.Physical },
-    { id: 'pela', name: 'Pela', path: 'Nihility', color: ELEMENT_COLORS.Ice },
-    { id: 'phainon', name: 'Phainon', path: 'Destruction', color: ELEMENT_COLORS.Physical },
-    { id: 'qingque', name: 'Qingque', path: 'Erudition', color: ELEMENT_COLORS.Quantum },
-    { id: 'rappa', name: 'Rappa', path: 'Erudition', color: ELEMENT_COLORS.Imaginary },
-    { id: 'robin', name: 'Robin', path: 'Harmony', color: ELEMENT_COLORS.Physical },
-    { id: 'ruanmei', name: 'Ruan Mei', path: 'Harmony', color: ELEMENT_COLORS.Ice },
-    { id: 'saber', name: 'Saber', path: 'Destruction', color: ELEMENT_COLORS.Wind },
-    { id: 'sampo', name: 'Sampo', path: 'Nihility', color: ELEMENT_COLORS.Wind },
-    { id: 'seele', name: 'Seele', path: 'The Hunt', color: ELEMENT_COLORS.Quantum },
-    { id: 'serval', name: 'Serval', path: 'Erudition', color: ELEMENT_COLORS.Lightning },
-    { id: 'silverwolf', name: 'Silver Wolf', path: 'Nihility', color: ELEMENT_COLORS.Quantum },
-    { id: 'sparkle', name: 'Sparkle', path: 'Harmony', color: ELEMENT_COLORS.Quantum },
-    { id: 'sunday', name: 'Sunday', path: 'Harmony', color: ELEMENT_COLORS.Imaginary },
-    { id: 'sushang', name: 'Sushang', path: 'The Hunt', color: ELEMENT_COLORS.Physical },
-    { id: 'thedahlia', name: 'The Dahlia', path: 'Nihility', color: ELEMENT_COLORS.Fire },
-    { id: 'theherta', name: 'The Herta', path: 'Erudition', color: ELEMENT_COLORS.Ice },
-    { id: 'tingyun', name: 'Tingyun', path: 'Harmony', color: ELEMENT_COLORS.Lightning },
-    { id: 'topaz', name: 'Topaz & Numby', path: 'The Hunt', color: ELEMENT_COLORS.Fire },
-    { id: 'tb_phys', name: 'MC (Physical)', path: 'Destruction', color: ELEMENT_COLORS.Physical },
-    { id: 'tb_fire', name: 'MC (Fire)', path: 'Preservation', color: ELEMENT_COLORS.Fire },
-    { id: 'tb_imag', name: 'MC (Harmony)', path: 'Harmony', color: ELEMENT_COLORS.Imaginary },
-    { id: 'tb_rem', name: 'MC (Remembrance)', path: 'Remembrance', color: ELEMENT_COLORS.Ice },
-    { id: 'tribbie', name: 'Tribbie', path: 'Harmony', color: ELEMENT_COLORS.Quantum },
-    { id: 'welt', name: 'Welt', path: 'Nihility', color: ELEMENT_COLORS.Imaginary },
-    { id: 'xueyi', name: 'Xueyi', path: 'Destruction', color: ELEMENT_COLORS.Quantum },
-    { id: 'yanqing', name: 'Yanqing', path: 'The Hunt', color: ELEMENT_COLORS.Ice },
-    { id: 'yukong', name: 'Yukong', path: 'Harmony', color: ELEMENT_COLORS.Imaginary },
-    { id: 'yunli', name: 'Yunli', path: 'Destruction', color: ELEMENT_COLORS.Physical }
+    // --- 4 STAR CHARACTERS ---
+    { id: 'arlan', name: 'Arlan', path: 'Destruction', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/a/a9/Character_Arlan_Icon.png/revision/latest?cb=20230723080444' },
+    { id: 'asta', name: 'Asta', path: 'Harmony', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/9f/Character_Asta_Icon.png/revision/latest?cb=20230723080506' },
+    { id: 'danheng', name: 'Dan Heng', path: 'The Hunt', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/1a/Character_Dan_Heng_Icon.png/revision/latest?cb=20230723080807' },
+    { id: 'gallagher', name: 'Gallagher', path: 'Abundance', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/12/Character_Gallagher_Icon.png/revision/latest?cb=20240325014209' },
+    { id: 'guinaifen', name: 'Guinaifen', path: 'Nihility', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/98/Character_Guinaifen_Icon.png/revision/latest?cb=20231030000303' },
+    { id: 'hanya', name: 'Hanya', path: 'Harmony', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Hanya_Icon.png/revision/latest?cb=20231209094526' },
+    { id: 'herta', name: 'Herta', path: 'Erudition', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/b/bf/Character_Herta_Icon.png/revision/latest?cb=20230723081012' },
+    { id: 'hook', name: 'Hook', path: 'Destruction', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/d/d5/Character_Hook_Icon.png/revision/latest?cb=20230723081051' },
+    { id: 'luka', name: 'Luka', path: 'Nihility', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c7/Character_Luka_Icon.png/revision/latest?cb=20230723081255' },
+    { id: 'lynx', name: 'Lynx', path: 'Abundance', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/6/6c/Character_Lynx_Icon.png/revision/latest?cb=20231031113034' },
+    { id: 'march7', name: 'March 7th', path: 'Preservation', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/d/d3/Character_March_7th_Icon.png/revision/latest?cb=20230723081458' },
+    { id: 'march7hunt', name: 'March 7th (Hunt)', path: 'The Hunt', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/7b/Character_March_7th_%28The_Hunt%29_Icon.png/revision/latest?cb=20240724122845' },
+    { id: 'misha', name: 'Misha', path: 'Destruction', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/4d/Character_Misha_Icon.png/revision/latest?cb=20240206104846' },
+    { id: 'moze', name: 'Moze', path: 'The Hunt', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/25/Character_Moze_Icon.png/revision/latest?cb=20240910183040' },
+    { id: 'natasha', name: 'Natasha', path: 'Abundance', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/6/61/Character_Natasha_Icon.png/revision/latest?cb=20230723081534' },
+    { id: 'pela', name: 'Pela', path: 'Nihility', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/c/c2/Character_Pela_Icon.png/revision/latest?cb=20230723081559' },
+    { id: 'qingque', name: 'Qingque', path: 'Erudition', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/2e/Character_Qingque_Icon.png/revision/latest?cb=20230723081644' },
+    { id: 'sampo', name: 'Sampo', path: 'Nihility', color: ELEMENT_COLORS.Wind, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/5/53/Character_Sampo_Icon.png/revision/latest?cb=20230723081700' },
+    { id: 'serval', name: 'Serval', path: 'Erudition', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/7/7c/Character_Serval_Icon.png/revision/latest?cb=20230723081736' },
+    { id: 'sushang', name: 'Sushang', path: 'The Hunt', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/97/Character_Sushang_Icon.png/revision/latest?cb=20230723081849' },
+    { id: 'tingyun', name: 'Tingyun', path: 'Harmony', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/4f/Character_Tingyun_Icon.png/revision/latest?cb=20230723081906' },
+    { id: 'xueyi', name: 'Xueyi', path: 'Destruction', color: ELEMENT_COLORS.Quantum, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/2/23/Character_Xueyi_Icon.png/revision/latest?cb=20231227130429' },
+    { id: 'yukong', name: 'Yukong', path: 'Harmony', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/3/32/Character_Yukong_Icon.png/revision/latest?cb=20230723082209' }
 ];
 
-// --- FLOW DRAFT ---
+// ... (KODE FLOW DRAFT TETAP SAMA) ...
 const draftFlow = [
-    { type: 'ban', team: 'blue', text: "NODE 1: BLUE BAN" },
-    { type: 'ban', team: 'red',  text: "NODE 1: RED BAN" },
-    { type: 'pick', team: 'blue', text: "NODE 1: BLUE PICK" },
-    { type: 'pick', team: 'red',  text: "NODE 1: RED PICK" },
-    
-    { type: 'ban', team: 'blue', text: "NODE 2: BLUE BAN" },
-    { type: 'ban', team: 'red',  text: "NODE 2: RED BAN" },
-    { type: 'pick', team: 'red',  text: "NODE 2: RED PICK (1/2)" },
-    { type: 'pick', team: 'red',  text: "NODE 2: RED PICK (2/2)" },
-    { type: 'pick', team: 'blue', text: "NODE 2: BLUE PICK (1/2)" },
-    { type: 'pick', team: 'blue', text: "NODE 2: BLUE PICK (2/2)" },
-    
-    { type: 'ban', team: 'blue', text: "NODE 3: BLUE BAN" },
-    { type: 'ban', team: 'red',  text: "NODE 3: RED BAN" },
-    { type: 'pick', team: 'blue', text: "NODE 3: BLUE PICK" },
-    { type: 'pick', team: 'red',  text: "NODE 3: RED PICK" },
+    // --- PHASE 1 ---
+    { phase: 1, type: 'ban', team: 'blue', text: "P1 NODE 1: BLUE BAN" },
+    { phase: 1, type: 'ban', team: 'red',  text: "P1 NODE 1: RED BAN" },
+    { phase: 1, type: 'pick', team: 'blue', text: "P1 NODE 1: BLUE PICK" },
+    { phase: 1, type: 'pick', team: 'red',  text: "P1 NODE 1: RED PICK" },
+    { phase: 1, type: 'ban', team: 'blue', text: "P1 NODE 2: BLUE BAN" },
+    { phase: 1, type: 'ban', team: 'red',  text: "P1 NODE 2: RED BAN" },
+    { phase: 1, type: 'pick', team: 'red',  text: "P1 NODE 2: RED PICK (1/2)" },
+    { phase: 1, type: 'pick', team: 'red',  text: "P1 NODE 2: RED PICK (2/2)" },
+    { phase: 1, type: 'pick', team: 'blue', text: "P1 NODE 2: BLUE PICK (1/2)" },
+    { phase: 1, type: 'pick', team: 'blue', text: "P1 NODE 2: BLUE PICK (2/2)" },
+    { phase: 1, type: 'ban', team: 'blue', text: "P1 NODE 3: BLUE BAN" },
+    { phase: 1, type: 'ban', team: 'red',  text: "P1 NODE 3: RED BAN" },
+    { phase: 1, type: 'pick', team: 'blue', text: "P1 NODE 3: BLUE PICK" },
+    { phase: 1, type: 'pick', team: 'red',  text: "P1 NODE 3: RED PICK" },
+
+    // --- PHASE 2 ---
+    { phase: 2, type: 'ban', team: 'blue', text: "P2 NODE 1: BLUE BAN" },
+    { phase: 2, type: 'ban', team: 'red',  text: "P2 NODE 1: RED BAN" },
+    { phase: 2, type: 'pick', team: 'blue', text: "P2 NODE 1: BLUE PICK" },
+    { phase: 2, type: 'pick', team: 'red',  text: "P2 NODE 1: RED PICK" },
+    { phase: 2, type: 'ban', team: 'blue', text: "P2 NODE 2: BLUE BAN" },
+    { phase: 2, type: 'ban', team: 'red',  text: "P2 NODE 2: RED BAN" },
+    { phase: 2, type: 'pick', team: 'red',  text: "P2 NODE 2: RED PICK (1/2)" },
+    { phase: 2, type: 'pick', team: 'red',  text: "P2 NODE 2: RED PICK (2/2)" },
+    { phase: 2, type: 'pick', team: 'blue', text: "P2 NODE 2: BLUE PICK (1/2)" },
+    { phase: 2, type: 'pick', team: 'blue', text: "P2 NODE 2: BLUE PICK (2/2)" },
+    { phase: 2, type: 'ban', team: 'blue', text: "P2 NODE 3: BLUE BAN" },
+    { phase: 2, type: 'ban', team: 'red',  text: "P2 NODE 3: RED BAN" },
+    { phase: 2, type: 'pick', team: 'blue', text: "P2 NODE 3: BLUE PICK" },
+    { phase: 2, type: 'pick', team: 'red',  text: "P2 NODE 3: RED PICK" },
 ];
 
 let currentStep = 0;
-
-// STATE SETS
-let bluePicks = new Set();
-let redPicks = new Set();
+let bluePicks = []; 
+let redPicks = [];
+let blueBans = [];
+let redBans = [];
 let univBanSet = new Set();
-let blueBanSet = new Set();
-let redBanSet = new Set();
 
 let isUniversalMode = false;
 let timeLeft = 30;
 let timerInterval;
+let isPaused = true;
 
-function init() {
-    renderSlots();
-    renderGrid(characters);
-}
+function init() { renderSlots(); renderGrid(characters); }
 
 // --- TIMER & GAME START ---
 function startGame() {
     document.body.classList.add('game-started');
     updateStatus();
-    startTimer();
-}
-
-function startTimer() {
-    clearInterval(timerInterval);
+    isPaused = true; // Start in paused/ready state
     timeLeft = 30;
     updateTimerDisplay();
-    document.getElementById('timer-status').innerText = "RUNNING";
-    document.getElementById('timer-status').style.color = "#44ff44";
+    updateTimerStatus();
+    runTimerLoop();
+}
 
+function runTimerLoop() {
+    clearInterval(timerInterval);
     timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            autoPickRandom();
+        if (!isPaused) {
+            timeLeft--;
+            updateTimerDisplay();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                autoPickRandom();
+            }
         }
     }, 1000);
+}
+
+function resetRoundTimer() {
+    timeLeft = 30;
+    updateTimerDisplay();
+}
+
+function togglePauseTimer() { isPaused = !isPaused; updateTimerStatus(); }
+
+function updateTimerStatus() { 
+    const statusEl = document.getElementById('timer-status');
+    const btn = document.getElementById('pause-btn');
+    if (isPaused) {
+        if (currentStep === 0 && timeLeft === 30) {
+            btn.innerText = "START"; statusEl.innerText = "READY"; statusEl.style.color = "white"; btn.classList.add('paused');
+        } else {
+            statusEl.innerText = "PAUSED"; statusEl.style.color = "#ffcc00"; btn.innerText = "RESUME"; btn.classList.add('paused');
+        }
+    } else {
+        statusEl.innerText = "RUNNING"; statusEl.style.color = "#44ff44"; btn.innerText = "PAUSE"; btn.classList.remove('paused');
+    }
 }
 
 function updateTimerDisplay() {
     const timerEl = document.getElementById('timer');
     timerEl.textContent = timeLeft;
-    if (timeLeft <= 10) timerEl.style.color = '#ff4444';
-    else timerEl.style.color = 'white';
+    timerEl.style.color = timeLeft <= 10 ? '#ff4444' : 'white';
 }
 
 function autoPickRandom() {
@@ -170,273 +201,378 @@ function autoPickRandom() {
     const available = characters.filter(c => 
         isCharAvailable(c.id, currentPhase.team, currentPhase.type)
     );
-
     if (available.length > 0) {
         const randomChar = available[Math.floor(Math.random() * available.length)];
         handleCharClick(randomChar);
     }
 }
 
-// --- LOGIKA UTAMA: MIRROR MATCH ALLOWED ---
+// --- LOGIKA UTAMA (Mirror Ban & Reset Phase Ban) ---
 function isCharAvailable(charId, team, phaseType) {
     if (univBanSet.has(charId)) return false;
 
+    const currentPhase = draftFlow[currentStep] ? draftFlow[currentStep].phase : 1;
+
+    // Filter Bans Active (Hanya ban di phase saat ini yang berlaku)
+    const activeBlueBans = blueBans.filter(b => b.phase === currentPhase);
+    const activeRedBans = redBans.filter(b => b.phase === currentPhase);
+    
+    const isBannedByBlue = activeBlueBans.some(b => b.char.id === charId);
+    const isBannedByRed = activeRedBans.some(b => b.char.id === charId);
+
+    // Cek Pick Sendiri (Global - Gabisa pick karakter yang sudah dipick tim sendiri di phase manapun)
+    const isPickedByBlue = bluePicks.some(p => p.char.id === charId);
+    const isPickedByRed = redPicks.some(p => p.char.id === charId);
+
     if (phaseType === 'pick') {
-        if (team === 'blue' && redBanSet.has(charId)) return false;
-        if (team === 'red' && blueBanSet.has(charId)) return false;
+        // Gaboleh pick yang sedang diban lawan DI PHASE INI
+        if (team === 'blue' && isBannedByRed) return false;
+        if (team === 'red' && isBannedByBlue) return false;
         
-        // No duplicate in same team
-        if (team === 'blue' && bluePicks.has(charId)) return false;
-        if (team === 'red' && redPicks.has(charId)) return false;
+        // Gaboleh pick yang SUDAH dipick tim sendiri
+        if (team === 'blue' && isPickedByBlue) return false;
+        if (team === 'red' && isPickedByRed) return false;
 
         return true; 
     }
 
     if (phaseType === 'ban') {
-        if (bluePicks.has(charId) || redPicks.has(charId)) return false;
-        if (blueBanSet.has(charId) || redBanSet.has(charId)) return false;
+        // Rule: Gaboleh ban yang SUDAH diban oleh TIM SENDIRI di phase ini
+        if (team === 'blue' && isBannedByBlue) return false;
+        if (team === 'red' && isBannedByRed) return false;
+        
+        // NOTE: Mirror Ban diperbolehkan (tidak ada cek ban lawan)
+
+        // Rule: Gaboleh ban yang SUDAH dipick di phase ini
+        const currentBluePicks = bluePicks.filter(p => p.phase === currentPhase);
+        const currentRedPicks = redPicks.filter(p => p.phase === currentPhase);
+        const isPickedNowBlue = currentBluePicks.some(p => p.char.id === charId);
+        const isPickedNowRed = currentRedPicks.some(p => p.char.id === charId);
+
+        if (isPickedNowBlue || isPickedNowRed) return false;
+
         return true;
     }
     return false;
 }
 
 function handleCharClick(char) {
-    if (isUniversalMode) {
-        addUniversalBan(char);
-        return;
-    }
-    
+    if (isUniversalMode) { addUniversalBan(char); return; }
+    if (isPaused) { alert("Silakan klik START/RESUME untuk melanjutkan."); return; }
     if (currentStep >= draftFlow.length) return;
 
-    const currentPhase = draftFlow[currentStep];
+    const curr = draftFlow[currentStep];
 
-    if (!isCharAvailable(char.id, currentPhase.team, currentPhase.type)) {
+    if (!isCharAvailable(char.id, curr.team, curr.type)) {
         alert("Karakter tidak tersedia!");
         return;
     }
 
-    // EKSEKUSI
-    if (currentPhase.type === 'ban') {
-        if (currentPhase.team === 'blue') blueBanSet.add(char.id);
-        else redBanSet.add(char.id);
-        fillBanSlot(currentPhase.team, char);
+    const entry = { char: char, phase: curr.phase };
+
+    if (curr.type === 'ban') {
+        if (curr.team === 'blue') blueBans.push(entry); else redBans.push(entry);
     } else {
-        if (currentPhase.team === 'blue') bluePicks.add(char.id);
-        else redPicks.add(char.id);
-        fillPickSlot(currentPhase.team, char);
+        if (curr.team === 'blue') bluePicks.push(entry); else redPicks.push(entry);
     }
 
     currentStep++;
+    renderSlots(); 
     renderGrid(characters);
     updateStatus();
 
     if (currentStep < draftFlow.length) {
-        startTimer();
+        resetRoundTimer();
     } else {
         clearInterval(timerInterval);
         document.getElementById('timer').textContent = "GG";
         document.getElementById('timer-status').innerText = "FINISHED";
+        setTimeout(showFinalResult, 1000);
     }
 }
 
-// --- RENDER FUNCTIONS ---
+// --- RENDER SYSTEM ---
 function renderSlots() {
-    const blueContainer = document.getElementById('blue-slots');
-    const redContainer = document.getElementById('red-slots');
-    const blueBans = document.getElementById('blue-bans');
-    const redBans = document.getElementById('red-bans');
+    const currentPhase = currentStep < draftFlow.length ? draftFlow[currentStep].phase : 2;
+    renderHistory('blue', currentPhase);
+    renderHistory('red', currentPhase);
+    renderActiveSlots('blue', currentPhase);
+    renderActiveSlots('red', currentPhase);
+    renderActiveBans('blue', currentPhase);
+    renderActiveBans('red', currentPhase);
+
     const univContainer = document.getElementById('univ-ban-slots');
-
     univContainer.innerHTML = '';
-    for(let i=0; i<4; i++) univContainer.innerHTML += `<div class="univ-ban-box" id="univ-slot-${i}" onclick="removeUnivBan(${i})"></div>`;
+    let i = 0;
+    univBanSet.forEach(id => {
+        const char = characters.find(c => c.id === id);
+        if(char) univContainer.innerHTML += createIcon(char, 40, true); 
+        i++;
+    });
+    for(; i<4; i++) univContainer.innerHTML += `<div class="univ-ban-box" id="univ-${i}" onclick="removeUnivBan('${i}')"></div>`;
+}
 
-    blueContainer.innerHTML = '';
-    redContainer.innerHTML = '';
+function renderHistory(team, currentPhase) {
+    const historyContainer = document.getElementById(`${team}-p1-history`);
+    const historySlots = document.getElementById(`${team}-p1-slots`);
+    const historyBans = document.getElementById(`${team}-p1-bans`);
+    const historyTitle = document.getElementById(`${team}-title`);
+    const banLabel = document.getElementById(`${team}-ban-label`);
+    
+    const picks = team === 'blue' ? bluePicks : redPicks;
+    const bans = team === 'blue' ? blueBans : redBans;
+    
+    const p1Picks = picks.filter(p => p.phase === 1);
+    const p1Bans = bans.filter(p => p.phase === 1);
+
+    if (currentPhase === 2) {
+        historyContainer.classList.remove('hidden');
+        historyTitle.textContent = `${team.toUpperCase()} TEAM - PHASE 2`;
+        banLabel.textContent = "BANS (PHASE 2)";
+        historySlots.innerHTML = '';
+        p1Picks.forEach(p => historySlots.innerHTML += `<div class="history-slot">${createIcon(p.char, '100%', false)}</div>`);
+        historyBans.innerHTML = '';
+        p1Bans.forEach(p => historyBans.innerHTML += `<div class="history-slot" style="border-color:#ff4444;">${createIcon(p.char, '100%', false)}</div>`);
+    } else {
+        historyContainer.classList.add('hidden');
+        historyTitle.textContent = `${team.toUpperCase()} TEAM - PHASE 1`;
+        banLabel.textContent = "BANS (PHASE 1)";
+    }
+}
+
+function renderActiveSlots(team, currentPhase) {
+    const container = document.getElementById(`${team}-active-slots`);
+    container.innerHTML = '';
+    const picks = team === 'blue' ? bluePicks : redPicks;
+    const currentPicks = picks.filter(p => p.phase === currentPhase);
+
     for(let i=0; i<4; i++) {
-        blueContainer.innerHTML += `<div class="slot" id="blue-slot-${i}">Slot Kosong</div>`;
-        redContainer.innerHTML += `<div class="slot" id="red-slot-${i}">Slot Kosong</div>`;
+        if (i < currentPicks.length) {
+            const char = currentPicks[i].char;
+            container.innerHTML += `<div class="slot filled" style="border-color:${char.color}; background:rgba(255,255,255,0.1);">${createIcon(char, 40)}<span>${char.name}</span></div>`;
+        } else {
+            container.innerHTML += `<div class="slot">Slot Kosong</div>`;
+        }
     }
+}
 
-    blueBans.innerHTML = '';
-    redBans.innerHTML = '';
-    for(let i=0; i<3; i++) {
-        blueBans.innerHTML += `<div class="team-ban-slot" id="blue-ban-${i}"></div>`;
-        redBans.innerHTML += `<div class="team-ban-slot" id="red-ban-${i}"></div>`;
-    }
+function renderActiveBans(team, currentPhase) {
+    const container = document.getElementById(`${team}-active-bans`);
+    container.innerHTML = '';
+    const bans = team === 'blue' ? blueBans : redBans;
+    const currentBans = bans.filter(b => b.phase === currentPhase);
+    
+    currentBans.forEach(b => {
+        container.innerHTML += `<div class="team-ban-slot filled" style="border-color:${b.char.color}; background:${b.char.color};">${createIcon(b.char, '100%')}</div>`;
+    });
+    const emptySlots = 3 - currentBans.length;
+    for(let i=0; i < emptySlots; i++) container.innerHTML += `<div class="team-ban-slot"></div>`;
+}
+
+function createIcon(char, size) {
+    const imgUrl = char.img ? `https://wsrv.nl/?url=${encodeURIComponent(char.img)}` : '';
+    const style = typeof size === 'string' ? `width:${size};height:${size}` : `width:${size}px;height:${size}px`;
+    if (char.img) return `<img src="${imgUrl}" style="${style}; object-fit:cover; display:block;">`;
+    return `<div style="${style}; background:${char.color}; display:flex; justify-content:center; align-items:center; font-weight:bold;">${char.name.charAt(0)}</div>`;
 }
 
 function renderGrid(chars) {
     const grid = document.getElementById('char-grid');
     grid.innerHTML = '';
+    const curr = currentStep < draftFlow.length ? draftFlow[currentStep] : null;
     
-    const currentPhase = currentStep < draftFlow.length ? draftFlow[currentStep] : null;
-    const activeTeam = currentPhase ? currentPhase.team : null;
-    const isPickPhase = currentPhase ? currentPhase.type === 'pick' : false;
+    const activeTeam = curr ? curr.team : null;
+    const isPick = curr ? curr.type === 'pick' : false;
+    const currentPhase = curr ? curr.phase : 1;
+
+    const activeBlueBans = blueBans.filter(b => b.phase === currentPhase);
+    const activeRedBans = redBans.filter(b => b.phase === currentPhase);
 
     chars.forEach(char => {
         const el = document.createElement('div');
         el.className = 'char-card';
-        el.id = `char-${char.id}`;
         
-        // --- VISUAL LOGIC ---
         let isUnavailable = false;
-        if (univBanSet.has(char.id)) isUnavailable = true;
-        
-        // Gelap jika sudah dipick tim sendiri
-        if (activeTeam === 'blue' && bluePicks.has(char.id)) isUnavailable = true;
-        if (activeTeam === 'red' && redPicks.has(char.id)) isUnavailable = true;
+        let isGreyedOut = false;
 
-        // Gelap jika diban lawan (khusus fase Pick)
-        if (isPickPhase) {
-            if (activeTeam === 'blue' && redBanSet.has(char.id)) isUnavailable = true;
-            if (activeTeam === 'red' && blueBanSet.has(char.id)) isUnavailable = true;
+        if (univBanSet.has(char.id)) { isUnavailable = true; isGreyedOut = true; }
+
+        const pickedBlue = bluePicks.some(p => p.char.id === char.id);
+        const pickedRed = redPicks.some(p => p.char.id === char.id);
+        
+        if (activeTeam === 'blue' && pickedBlue) { isUnavailable = true; isGreyedOut = true; }
+        if (activeTeam === 'red' && pickedRed) { isUnavailable = true; isGreyedOut = true; }
+
+        const bannedBlueNow = activeBlueBans.some(b => b.char.id === char.id);
+        const bannedRedNow = activeRedBans.some(b => b.char.id === char.id);
+
+        if (isPick) {
+            if (activeTeam === 'blue' && bannedRedNow) { isUnavailable = true; el.classList.add('banned-opponent'); isGreyedOut = true; }
+            if (activeTeam === 'red' && bannedBlueNow) { isUnavailable = true; el.classList.add('banned-opponent'); isGreyedOut = true; }
         }
 
-        if (isUnavailable) el.classList.add('picked');
+        if (isGreyedOut) el.classList.add('picked');
 
-        // BADGES
         let badge = '';
-        if (blueBanSet.has(char.id)) badge += '<div style="position:absolute; top:0; left:0; background:blue; color:white; font-size:9px; padding:3px 6px; border-bottom-right-radius:5px; z-index:10;">BAN</div>';
-        if (redBanSet.has(char.id)) badge += '<div style="position:absolute; top:0; right:0; background:red; color:white; font-size:9px; padding:3px 6px; border-bottom-left-radius:5px; z-index:10;">BAN</div>';
+        if (bannedBlueNow) badge += '<span style="position:absolute;top:0;left:0;background:blue;font-size:8px;padding:2px;z-index:2;">BAN P'+currentPhase+'</span>';
+        if (bannedRedNow) badge += '<span style="position:absolute;top:0;right:0;background:red;font-size:8px;padding:2px;z-index:2;">BAN P'+currentPhase+'</span>';
         
-        if (bluePicks.has(char.id)) badge += '<div style="position:absolute; top:5px; right:5px; width:12px; height:12px; background:var(--blue-team); border-radius:50%; border:2px solid white; box-shadow:0 0 5px blue; z-index:10;"></div>';
-        if (redPicks.has(char.id)) badge += '<div style="position:absolute; top:5px; left:5px; width:12px; height:12px; background:var(--red-team); border-radius:50%; border:2px solid white; box-shadow:0 0 5px red; z-index:10;"></div>';
+        if (pickedBlue) badge += '<span style="position:absolute;bottom:20px;left:0;background:blue;width:10px;height:10px;border-radius:50%;border:1px solid white;z-index:2;"></span>';
+        if (pickedRed) badge += '<span style="position:absolute;bottom:20px;right:0;background:red;width:10px;height:10px;border-radius:50%;border:1px solid white;z-index:2;"></span>';
 
-        // --- IMAGE vs INITIAL ---
-        // Jika ada link gambar (char.img), pakai itu. Jika tidak, pakai placeholder warna.
-        const imageSrc = char.img ? char.img : `images/${char.id}.jpg`;
+        const imgUrl = char.img ? `https://wsrv.nl/?url=${encodeURIComponent(char.img)}` : `images/${char.id}.jpg`;
         
         el.innerHTML = `
             ${badge}
-            <img src="${imageSrc}" class="char-img" alt="${char.name}" 
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            
-            <div class="char-initial" style="background:${char.color}; display:none;">
-                ${char.name.charAt(0)}
-            </div>
-
+            <img src="${imgUrl}" class="char-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="char-initial" style="background:${char.color};display:none">${char.name.charAt(0)}</div>
             <div class="char-name">${char.name}</div>
         `;
-        
         el.onclick = () => handleCharClick(char);
         grid.appendChild(el);
     });
 }
 
-function fillBanSlot(team, char) {
-    for (let i = 0; i < 3; i++) {
-        const slot = document.getElementById(`${team}-ban-${i}`);
-        if (!slot.classList.contains('filled')) {
-            slot.classList.add('filled');
-            slot.style.backgroundColor = char.color;
-            slot.style.borderColor = char.color;
-            slot.style.boxShadow = `0 0 10px ${char.color}`;
-            
-            // Tampilkan icon kecil jika ada gambar, atau teks
-            if(char.img) {
-                slot.innerHTML = `<img src="${char.img}" style="width:100%; height:100%; object-fit:cover;">`;
-            } else {
-                slot.innerHTML = `<span class="ban-icon-text">${char.name.charAt(0)}</span>`;
-            }
-            break;
-        }
-    }
-}
-
-function fillPickSlot(team, char) {
-    for (let i = 0; i < 4; i++) {
-        const slot = document.getElementById(`${team}-slot-${i}`);
-        if (slot.innerHTML === "Slot Kosong") {
-            // Icon kecil di slot pick
-            let iconHtml = `<div style="width:30px; height:30px; border-radius:50%; background:${char.color}; margin-right:10px; border:2px solid white;"></div>`;
-            if (char.img) {
-                iconHtml = `<img src="${char.img}" style="width:35px; height:35px; border-radius:50%; margin-right:10px; border:2px solid white; object-fit:cover;">`;
-            }
-
-            slot.innerHTML = `
-                ${iconHtml}
-                <span>${char.name}</span>
-            `;
-            slot.classList.add('filled');
-            break;
-        }
-    }
-}
-
 function updateStatus() {
-    const statusBar = document.getElementById('status-bar');
+    const bar = document.getElementById('status-bar');
     const bluePanel = document.getElementById('blue-panel');
     const redPanel = document.getElementById('red-panel');
-
-    bluePanel.classList.remove('active-blue');
-    redPanel.classList.remove('active-red');
-    statusBar.style.backgroundColor = '#333';
+    bluePanel.classList.remove('active-turn');
+    redPanel.classList.remove('active-turn');
 
     if (currentStep >= draftFlow.length) {
-        statusBar.textContent = "DRAFT SELESAI";
-        statusBar.style.color = "#d4b168";
-        return;
+        bar.textContent = "SELESAI"; bar.style.backgroundColor = "#d4b168"; return;
     }
-    const phase = draftFlow[currentStep];
-    statusBar.textContent = phase.text;
-    if (phase.team === 'blue') {
-        bluePanel.classList.add('active-blue');
-        statusBar.style.backgroundColor = 'var(--blue-team)';
-    } else {
-        redPanel.classList.add('active-red');
-        statusBar.style.backgroundColor = 'var(--red-team)';
-    }
+    const curr = draftFlow[currentStep];
+    bar.textContent = curr.text;
+    bar.style.backgroundColor = curr.team === 'blue' ? 'var(--blue-team)' : 'var(--red-team)';
+    
+    if (curr.team === 'blue') bluePanel.classList.add('active-turn');
+    else redPanel.classList.add('active-turn');
 }
 
 function toggleUniversalMode() {
     isUniversalMode = !isUniversalMode;
     const btn = document.getElementById('toggle-univ-btn');
-    if (isUniversalMode) {
-        clearInterval(timerInterval);
-        document.getElementById('timer-status').innerText = "PAUSED";
+    if(isUniversalMode) {
+        isPaused = true; updateTimerStatus();
         document.body.classList.add('universal-mode-active');
-        btn.textContent = "MODE: ON";
-        btn.classList.add('active');
+        btn.innerText = "ON"; btn.style.background = "red";
     } else {
-        startTimer();
         document.body.classList.remove('universal-mode-active');
-        btn.textContent = "MODE: OFF";
-        btn.classList.remove('active');
+        btn.innerText = "OFF"; btn.style.background = "#333";
         renderGrid(characters);
     }
 }
 
 function addUniversalBan(char) {
-    for(let i=0; i<4; i++) {
-        const slot = document.getElementById(`univ-slot-${i}`);
-        if (!slot.classList.contains('filled')) {
-            slot.classList.add('filled');
-            slot.innerHTML = `<div style="width:100%; height:100%; background:${char.color}; opacity:0.7;"></div>`;
-            slot.dataset.charId = char.id;
-            univBanSet.add(char.id);
-            renderGrid(characters);
-            break;
-        }
+    if(!univBanSet.has(char.id)){
+        univBanSet.add(char.id);
+        renderSlots(); renderGrid(characters);
     }
 }
 
-function removeUnivBan(index) {
-    if (!isUniversalMode) return;
-    const slot = document.getElementById(`univ-slot-${index}`);
-    if (slot.classList.contains('filled')) {
-        const charId = slot.dataset.charId;
-        univBanSet.delete(charId);
-        slot.classList.remove('filled');
-        slot.innerHTML = '';
-        slot.removeAttribute('data-char-id');
-        renderGrid(characters);
-    }
-}
+function removeUnivBan(index) { alert("Tidak bisa dihapus."); }
 
-function filterChars(query) {
-    const lowerQ = query.toLowerCase();
-    const filtered = characters.filter(c => c.name.toLowerCase().includes(lowerQ));
+function filterChars(val) {
+    const filtered = characters.filter(c => c.name.toLowerCase().includes(val.toLowerCase()));
     renderGrid(filtered);
 }
 
+function showFinalResult() {
+    const overlay = document.getElementById('result-overlay');
+    const blueP1Cont = document.getElementById('final-blue-p1');
+    const blueP2Cont = document.getElementById('final-blue-p2');
+    const redP1Cont = document.getElementById('final-red-p1');
+    const redP2Cont = document.getElementById('final-red-p2');
+    const banContainer = document.getElementById('final-bans');
+
+    overlay.style.display = 'flex';
+
+    const renderCard = (char) => {
+        const imgUrl = char.img ? `https://wsrv.nl/?url=${encodeURIComponent(char.img)}` : '';
+        return `
+            <div class="result-card" style="border-color:${char.color}">
+                <img src="${imgUrl}" onerror="this.style.display='none'">
+                <div style="width:100%;height:100%;background:${char.color};display:${char.img?'none':'flex'};justify-content:center;align-items:center;font-weight:bold;">${char.name.charAt(0)}</div>
+                <div class="name">${char.name}</div>
+            </div>
+        `;
+    };
+
+    blueP1Cont.innerHTML = ''; blueP2Cont.innerHTML = '';
+    bluePicks.filter(p => p.phase === 1).forEach(p => blueP1Cont.innerHTML += renderCard(p.char));
+    bluePicks.filter(p => p.phase === 2).forEach(p => blueP2Cont.innerHTML += renderCard(p.char));
+
+    redP1Cont.innerHTML = ''; redP2Cont.innerHTML = '';
+    redPicks.filter(p => p.phase === 1).forEach(p => redP1Cont.innerHTML += renderCard(p.char));
+    redPicks.filter(p => p.phase === 2).forEach(p => redP2Cont.innerHTML += renderCard(p.char));
+
+    banContainer.innerHTML = '';
+    [...blueBans, ...redBans].forEach(b => {
+        const imgUrl = b.char.img ? `https://wsrv.nl/?url=${encodeURIComponent(b.char.img)}` : '';
+        banContainer.innerHTML += `
+            <div class="result-ban-item" title="Banned Phase ${b.phase}">
+                <img src="${imgUrl}">
+                <div style="width:100%;height:100%;background:${b.char.color};display:${b.char.img?'none':'block'}"></div>
+            </div>
+        `;
+    });
+}
+// --- FUNGSI RESET DRAFT ---
+function resetDraft() {
+    // 1. Konfirmasi
+    if (!confirm("Ulangi draft dari awal? (Data saat ini akan dihapus)")) {
+        return;
+    }
+
+    // 2. Hentikan Timer
+    clearInterval(timerInterval);
+    isPaused = true;
+
+    // 3. Bersihkan Semua Data
+    currentStep = 0;
+    bluePicks = [];
+    redPicks = [];
+    blueBans = [];
+    redBans = [];
+    univBanSet.clear();
+    
+    // 4. Reset Variabel Mode & Waktu
+    isUniversalMode = false;
+    timeLeft = 30;
+
+    // 5. Reset Tampilan Tombol Universal
+    const univBtn = document.getElementById('toggle-univ-btn');
+    if (univBtn) {
+        univBtn.textContent = "OFF";
+        univBtn.classList.remove('active');
+        document.body.classList.remove('universal-mode-active');
+    }
+
+    // 6. Reset Header Timer & Tombol Start
+    const statusEl = document.getElementById('timer-status');
+    const pauseBtn = document.getElementById('pause-btn');
+    
+    // Kembalikan tombol jadi "START" (Posisi Ready)
+    pauseBtn.innerText = "START";
+    pauseBtn.classList.add('paused'); 
+    
+    statusEl.innerText = "READY";
+    statusEl.style.color = "white";
+    
+    // Update angka timer
+    updateTimerDisplay();
+
+    // 7. Sembunyikan Overlay Hasil (Jika sedang terbuka)
+    document.getElementById('result-overlay').style.display = 'none';
+
+    // 8. Render Ulang Grid & Slot (Kosongkan Tampilan)
+    renderSlots();
+    renderGrid(characters);
+    updateStatus();
+
+    // CATATAN: Kita TIDAK memanggil document.body.classList.remove('game-started')
+    // agar Overlay Start tidak muncul lagi. Anda tetap di arena.
+}
 init();
