@@ -351,7 +351,7 @@ function renderActiveSlots(team, currentPhase) {
             const char = currentPicks[i].char;
             container.innerHTML += `<div class="slot filled" style="border-color:${char.color}; background:rgba(255,255,255,0.1);">${createIcon(char, 40)}<span>${char.name}</span></div>`;
         } else {
-            container.innerHTML += `<div class="slot">Slot Kosong</div>`;
+            container.innerHTML += `<div class="slot">CHAR KOMPE</div>`;
         }
     }
 }
