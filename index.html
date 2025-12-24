@@ -12,10 +12,21 @@
 <div id="start-overlay">
     <div class="overlay-content">
         <h1>HSR KOMPE</h1>
-        <p>AJUR MIJUKI GAUSAH MAIN</p>
+        <p>YANG CUPU GAUSAH MAIN</p>
         <button onclick="startGame()">MULAI DRAFT</button>
+        
+        <div class="contact-footer">
+            <p>Support & Feedback</p>
+            <div class="discord-badge">
+                <svg width="20" height="15" viewBox="0 0 127 96" fill="white">
+                    <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c1.24-23.28-5.83-47.5-22.11-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+                </svg>
+                <span>venvena</span>
+            </div>
+        </div>
     </div>
 </div>
+
 <div id="result-overlay" style="display: none;">
     <div class="result-content">
         <h1 style="color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 10px var(--gold);">TIM SABUNG HSR</h1>
@@ -23,12 +34,10 @@
         <div class="result-container">
             <div class="result-team-box blue">
                 <h2 style="color: var(--blue-team); border-bottom: 1px solid #555; padding-bottom:5px;">BLUE TEAM</h2>
-                
                 <div class="result-phase-block">
                     <span class="res-phase-label">PHASE 1 TEAM</span>
                     <div class="result-grid" id="final-blue-p1"></div>
                 </div>
-
                 <div class="result-phase-block">
                     <span class="res-phase-label">PHASE 2 TEAM</span>
                     <div class="result-grid" id="final-blue-p2"></div>
@@ -37,12 +46,10 @@
 
             <div class="result-team-box red">
                 <h2 style="color: var(--red-team); border-bottom: 1px solid #555; padding-bottom:5px;">RED TEAM</h2>
-                
                 <div class="result-phase-block">
                     <span class="res-phase-label">PHASE 1 TEAM</span>
                     <div class="result-grid" id="final-red-p1"></div>
                 </div>
-
                 <div class="result-phase-block">
                     <span class="res-phase-label">PHASE 2 TEAM</span>
                     <div class="result-grid" id="final-red-p2"></div>
@@ -56,14 +63,15 @@
         </div>
 
         <button onclick="location.reload()" class="result-btn">KOMPE LAGI</button>
-    </div>
-</div>
+        
+        <div style="margin-top: 20px; font-size: 0.8rem; color: #666;">
+            Contact Support: <strong style="color:#7289da">venvena</strong>
+        </div>
     </div>
 </div>
 
 <header>
     <h1>HSR Turnbase Kompe</h1>
-    
     <div id="timer-wrapper">
         <div id="timer-container">
             <div id="timer">30</div>
@@ -75,7 +83,6 @@
             <div id="timer-status">READY</div>
         </div>
     </div>
-
     <div id="status-bar">Menunggu Start...</div>
 </header>
 
