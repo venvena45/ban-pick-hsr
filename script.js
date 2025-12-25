@@ -301,16 +301,39 @@ function handleCharClick(char) {
     }
 }
 
-// --- RENDER SYSTEM ---
+// --- RENDER SYSTEM UPDATED ---
+
+// --- RENDER SYSTEM (FIXED LOGIC) ---
+
 function renderSlots() {
+    // Cek Phase saat ini
+    // Cek Phase saat ini
     const currentPhase = currentStep < draftFlow.length ? draftFlow[currentStep].phase : 2;
-    renderHistory('blue', currentPhase);
-    renderHistory('red', currentPhase);
+
+    // --- TAMBAHKAN INI (UPDATE JUDUL OTOMATIS) ---
+    document.getElementById('blue-title').textContent = `BLUE TEAM - PHASE ${currentPhase}`;
+    document.getElementById('red-title').textContent = `RED TEAM - PHASE ${currentPhase}`;
+    // ----------------------------------------------
+
+    // 1. Render Dashboard Atas
+    renderPhase1Top('blue', currentPhase);
+    renderPhase1Top('red', currentPhase);
+
+    // 1. Render Dashboard Atas (History Phase 1)
+    // HANYA MUNCUL jika Phase 1 sudah selesai (Artinya kita ada di Phase 2 atau Game Over)
+    renderPhase1Top('blue', currentPhase);
+    renderPhase1Top('red', currentPhase);
+
+    // 2. Render Panel Bawah (Tempat Drafting Utama)
+    // Panel ini selalu menampilkan slot aktif sesuai phase yang berjalan (1 atau 2)
     renderActiveSlots('blue', currentPhase);
     renderActiveSlots('red', currentPhase);
+
+    // 3. Render Bans & Universal Bans
     renderActiveBans('blue', currentPhase);
     renderActiveBans('red', currentPhase);
 
+    // Render Univ Ban List
     const univContainer = document.getElementById('univ-ban-slots');
     univContainer.innerHTML = '';
     let i = 0;
@@ -322,61 +345,83 @@ function renderSlots() {
     for(; i<4; i++) univContainer.innerHTML += `<div class="univ-ban-box" id="univ-${i}" onclick="removeUnivBan('${i}')"></div>`;
 }
 
-function renderHistory(team, currentPhase) {
-    const historyContainer = document.getElementById(`${team}-p1-history`);
-    const historySlots = document.getElementById(`${team}-p1-slots`);
-    const historyBans = document.getElementById(`${team}-p1-bans`);
-    const historyTitle = document.getElementById(`${team}-title`);
-    const banLabel = document.getElementById(`${team}-ban-label`);
+// LOGIKA BARU: Kotak Atas hanya terisi jika Phase > 1
+function renderPhase1Top(team, currentPhase) {
+    const container = document.getElementById(`${team}-p1-display`);
+    container.innerHTML = '';
     
-    const picks = team === 'blue' ? bluePicks : redPicks;
-    const bans = team === 'blue' ? blueBans : redBans;
-    
-    const p1Picks = picks.filter(p => p.phase === 1);
-    const p1Bans = bans.filter(p => p.phase === 1);
+    // Jika masih Phase 1, kotak atas biarkan kosong (placeholder saja)
+    if (currentPhase === 1) {
+        for(let i=0; i<4; i++) container.innerHTML += `<div class="p1-slot"></div>`;
+        return;
+    }
 
-    if (currentPhase === 2) {
-        historyContainer.classList.remove('hidden');
-        historyTitle.textContent = `${team.toUpperCase()} TEAM - PHASE 2`;
-        banLabel.textContent = "BANS (PHASE 2)";
-        historySlots.innerHTML = '';
-        p1Picks.forEach(p => historySlots.innerHTML += `<div class="history-slot">${createIcon(p.char, '100%', false)}</div>`);
-        historyBans.innerHTML = '';
-        p1Bans.forEach(p => historyBans.innerHTML += `<div class="history-slot" style="border-color:#ff4444;">${createIcon(p.char, '100%', false)}</div>`);
-    } else {
-        historyContainer.classList.add('hidden');
-        historyTitle.textContent = `${team.toUpperCase()} TEAM - PHASE 1`;
-        banLabel.textContent = "BANS (PHASE 1)";
+    // Jika sudah Phase 2 (atau selesai), isi dengan data Phase 1
+    const picks = team === 'blue' ? bluePicks : redPicks;
+    const p1Picks = picks.filter(p => p.phase === 1); 
+
+    for (let i = 0; i < 4; i++) {
+        if (i < p1Picks.length) {
+            const char = p1Picks[i].char;
+            container.innerHTML += `
+                <div class="p1-slot" style="border-color:${char.color}">
+                    ${createIcon(char, '100%')}
+                </div>`;
+        } else {
+            container.innerHTML += `<div class="p1-slot"></div>`;
+        }
     }
 }
 
+// LOGIKA LAMA DIKEMBALIKAN: Panel Bawah tempat drafting aktif
 function renderActiveSlots(team, currentPhase) {
     const container = document.getElementById(`${team}-active-slots`);
     container.innerHTML = '';
+    
     const picks = team === 'blue' ? bluePicks : redPicks;
-    const currentPicks = picks.filter(p => p.phase === currentPhase);
+    
+    // Ambil pick sesuai phase yang sedang berjalan (Bisa Phase 1 atau Phase 2)
+    const activePicks = picks.filter(p => p.phase === currentPhase);
 
+    // Loop 4 slot (karena setiap phase max 4 hero)
     for(let i=0; i<4; i++) {
-        if (i < currentPicks.length) {
-            const char = currentPicks[i].char;
+        if (i < activePicks.length) {
+            const char = activePicks[i].char;
             container.innerHTML += `<div class="slot filled" style="border-color:${char.color}; background:rgba(255,255,255,0.1);">${createIcon(char, 40)}<span>${char.name}</span></div>`;
         } else {
-            container.innerHTML += `<div class="slot">CHAR KOMPE</div>`;
+            // Teks placeholder sesuai phase
+            const text = currentPhase === 1 ? "CHAR KOMPE P1" : "CHAR KOMPE P2";
+            container.innerHTML += `<div class="slot">${text}</div>`;
         }
     }
 }
 
 function renderActiveBans(team, currentPhase) {
+    // 1. UPDATE JUDUL LABEL BAN (Otomatis ganti Phase 1 / Phase 2)
+    const banLabel = document.getElementById(`${team}-ban-label`);
+    if (banLabel) {
+        banLabel.textContent = `BANS (PHASE ${currentPhase})`;
+    }
+
+    // 2. RENDER SLOT BAN
     const container = document.getElementById(`${team}-active-bans`);
     container.innerHTML = '';
+    
     const bans = team === 'blue' ? blueBans : redBans;
+    
+    // Ambil ban HANYA untuk phase yang sedang aktif
     const currentBans = bans.filter(b => b.phase === currentPhase);
     
+    // Render ban yang sudah dipilih
     currentBans.forEach(b => {
         container.innerHTML += `<div class="team-ban-slot filled" style="border-color:${b.char.color}; background:${b.char.color};">${createIcon(b.char, '100%')}</div>`;
     });
+    
+    // Render sisa slot kosong (Total 3 Ban per Phase)
     const emptySlots = 3 - currentBans.length;
-    for(let i=0; i < emptySlots; i++) container.innerHTML += `<div class="team-ban-slot"></div>`;
+    for(let i=0; i < emptySlots; i++) {
+        container.innerHTML += `<div class="team-ban-slot"></div>`;
+    }
 }
 
 function createIcon(char, size) {

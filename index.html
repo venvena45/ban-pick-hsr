@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSR KOMPE BANG</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -28,7 +29,7 @@
 </div>
 
 <div id="result-overlay" style="display: none;">
-    <div class="result-content">
+    <div class="result-content" id="capture-area">
         <h1 style="color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 10px var(--gold);">TIM SABUNG HSR</h1>
         
         <div class="result-container">
@@ -62,7 +63,10 @@
             <div class="result-ban-row" id="final-bans"></div>
         </div>
 
-        <button onclick="location.reload()" class="result-btn">KOMPE LAGI</button>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button onclick="location.reload()" class="result-btn">KOMPE LAGI</button>
+            <button onclick="downloadScreenshot()" class="result-btn" style="background: linear-gradient(45deg, #444, #666);">SCREENSHOT</button>
+        </div>
         
         <div style="margin-top: 20px; font-size: 0.8rem; color: #666;">
             Contact Support: <strong style="color:#7289da">venvena</strong>
@@ -70,43 +74,57 @@
     </div>
 </div>
 
-<header>
-    <h1>HSR Turnbase Kompe</h1>
-    <div id="timer-wrapper">
-        <div id="timer-container">
-            <div id="timer">30</div>
-            <span>DETIK</span>
-        </div>
-        <div class="timer-controls">
-            <button id="pause-btn" onclick="togglePauseTimer()">START</button>
-            <button id="reset-btn" onclick="resetDraft()">RESET</button>
-            <div id="timer-status">READY</div>
+<div class="top-dashboard">
+    
+    <div class="p1-box team-blue-p1">
+        <div class="p1-title">BLUE PICK - PHASE 1</div>
+        <div class="p1-grid" id="blue-p1-display">
+            <div class="p1-slot"></div>
+            <div class="p1-slot"></div>
+            <div class="p1-slot"></div>
+            <div class="p1-slot"></div>
         </div>
     </div>
-    <div id="status-bar">Menunggu Start...</div>
-</header>
 
-<div class="arena">
-    <div class="team-panel team-blue" id="blue-panel">
-        <div class="team-title" id="blue-title">BLUE TEAM - PHASE 1</div>
-        
-        <div id="blue-p1-history" class="phase-history hidden">
-            <div class="history-section">
-                <div class="history-label">PHASE 1 PICKS</div>
-                <div class="history-row" id="blue-p1-slots"></div>
+    <header class="center-dashboard">
+        <h1>HSR Turnbase Kompe</h1>
+        <div id="timer-wrapper">
+            <div id="timer-container">
+                <div id="timer">30</div>
+                <span>DETIK</span>
             </div>
-            <div class="history-section">
-                <div class="history-label">PHASE 1 BANS</div>
-                <div class="history-row" id="blue-p1-bans"></div>
+            <div class="timer-controls">
+                <button id="pause-btn" onclick="togglePauseTimer()">START</button>
+                <button id="reset-btn" onclick="resetDraft()">RESET</button>
+                <div id="timer-status">READY</div>
             </div>
         </div>
+        <div id="status-bar">Menunggu Start...</div>
+    </header>
 
-        <div class="slot-container" id="blue-active-slots"></div>
+    <div class="p1-box team-red-p1">
+        <div class="p1-title">RED PICK - PHASE 1</div>
+        <div class="p1-grid" id="red-p1-display">
+            <div class="p1-slot"></div>
+            <div class="p1-slot"></div>
+            <div class="p1-slot"></div>
+            <div class="p1-slot"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="arena">
+    
+    <div class="team-panel team-blue" id="blue-panel">
+        <div class="team-title" id="blue-title">BLUE TEAM - PHASE 1</div>
         
         <div class="ban-section">
             <div class="ban-label" id="blue-ban-label">BANS (PHASE 1)</div>
             <div class="team-ban-container" id="blue-active-bans"></div>
         </div>
+
+        <div class="slot-container" id="blue-active-slots"></div>
     </div>
 
     <div class="hero-pool">
@@ -122,29 +140,24 @@
     </div>
 
     <div class="team-panel team-red" id="red-panel">
-        <div class="team-title" id="red-title">RED TEAM - PHASE 1</div>
+     <div class="team-title" id="red-title">RED TEAM - PHASE 1</div>
 
-        <div id="red-p1-history" class="phase-history hidden">
-            <div class="history-section">
-                <div class="history-label">PHASE 1 PICKS</div>
-                <div class="history-row" id="red-p1-slots"></div>
-            </div>
-            <div class="history-section">
-                <div class="history-label">PHASE 1 BANS</div>
-                <div class="history-row" id="red-p1-bans"></div>
-            </div>
-        </div>
-
-        <div class="slot-container" id="red-active-slots"></div>
-        
         <div class="ban-section">
             <div class="ban-label" id="red-ban-label">BANS (PHASE 1)</div>
             <div class="team-ban-container" id="red-active-bans"></div>
         </div>
+
+        <div class="slot-container" id="red-active-slots"></div>
     </div>
+
 </div>
 
 <script src="script.js"></script>
+
+<audio id="sfx-pick" src="sounds/pick.mp3"></audio>
+<audio id="sfx-ban" src="sounds/ban.mp3"></audio>
+<audio id="sfx-click" src="sounds/click.mp3"></audio>
+<audio id="sfx-timer" src="sounds/timer.mp3"></audio>
 
 </body>
 </html>
