@@ -227,41 +227,91 @@ function autoPickRandom() {
     }
 }
 
-// --- LOGIKA UTAMA ---
 function isCharAvailable(charId, team, phaseType) {
+    // 1. Cek Universal Ban (Tetap dilarang untuk kedua tim)
     if (univBanSet.has(charId)) return false;
 
+    // Tentukan Phase saat ini
     const currentPhase = draftFlow[currentStep] ? draftFlow[currentStep].phase : 1;
 
+    // Data Pick Tim Sendiri (Global - Semua Phase) untuk cek duplikat tim
+    const myTeamPicks = team === 'blue' ? bluePicks : redPicks;
+
+    // Data Ban Phase Ini
     const activeBlueBans = blueBans.filter(b => b.phase === currentPhase);
-    const activeRedBans = redBans.filter(b => b.phase === currentPhase);
-    const isBannedByBlue = activeBlueBans.some(b => b.char.id === charId);
-    const isBannedByRed = activeRedBans.some(b => b.char.id === charId);
+    const activeRedBans  = redBans.filter(b => b.phase === currentPhase);
 
-    const isPickedByBlue = bluePicks.some(p => p.char.id === charId);
-    const isPickedByRed = redPicks.some(p => p.char.id === charId);
+    // Data Pick Phase Ini (Untuk mencegah ban hero yang baru saja dipick saat ini)
+    const activeBluePicks = bluePicks.filter(p => p.phase === currentPhase);
+    const activeRedPicks  = redPicks.filter(p => p.phase === currentPhase);
+    const allActivePicks  = [...activeBluePicks, ...activeRedPicks];
 
+    // --- LOGIKA PICK (YANG DIUBAH) ---
     if (phaseType === 'pick') {
-        if (team === 'blue' && isBannedByRed) return false;
-        if (team === 'red' && isBannedByBlue) return false;
-        if (team === 'blue' && isPickedByBlue) return false; 
-        if (team === 'red' && isPickedByRed) return false;
+        // Rule 1: Global Team Lock (Tim sendiri tidak boleh pick char yang sama 2x)
+        if (myTeamPicks.some(p => p.char.id === charId)) return false;
+
+        // Rule 2: CEK BAN LAWAN SAJA
+        // "Kita ban lawan, kita tetap bisa pakai. Tapi kalau lawan ban kita, kita gabisa pakai."
+        
+        if (team === 'blue') {
+            // Jika saya Blue, cek apakah RED nge-ban char ini?
+            // (Ban saya sendiri ke Red tidak ngefek ke saya)
+            const isBannedByRed = activeRedBans.some(b => b.char.id === charId);
+            if (isBannedByRed) return false;
+        } 
+        else if (team === 'red') {
+            // Jika saya Red, cek apakah BLUE nge-ban char ini?
+            const isBannedByBlue = activeBlueBans.some(b => b.char.id === charId);
+            if (isBannedByBlue) return false;
+        }
+
         return true; 
     }
 
+    // --- LOGIKA BAN ---
     if (phaseType === 'ban') {
-        if (team === 'blue' && isBannedByBlue) return false;
-        if (team === 'red' && isBannedByRed) return false;
-        
-        const currentBluePicks = bluePicks.filter(p => p.phase === currentPhase);
-        const currentRedPicks = redPicks.filter(p => p.phase === currentPhase);
-        const isPickedNowBlue = currentBluePicks.some(p => p.char.id === charId);
-        const isPickedNowRed = currentRedPicks.some(p => p.char.id === charId);
+        // Rule: Sudah dipick di Phase ini (Tidak boleh ban char yang sudah diamankan)
+        if (allActivePicks.some(p => p.char.id === charId)) return false;
 
-        if (isPickedNowBlue || isPickedNowRed) return false;
+        // Rule: Jangan ban char yang sudah KITA ban sendiri (duplikat ban tim sendiri)
+        const myActiveBans = team === 'blue' ? activeBlueBans : activeRedBans;
+        if (myActiveBans.some(b => b.char.id === charId)) return false;
+
+        // Mirror Ban: Kita TIDAK mengecek ban lawan. 
+        // Jadi boleh ban char yang sama dengan yang diban lawan (Double Ban).
         return true;
     }
+
     return false;
+}
+
+function undoLastMove() {
+    if (currentStep === 0) return; // Tidak ada yang bisa di-undo
+
+    // Kurangi langkah
+    currentStep--;
+    const lastAction = draftFlow[currentStep];
+
+    // Hapus data dari array yang sesuai
+    if (lastAction.type === 'pick') {
+        if (lastAction.team === 'blue') bluePicks.pop();
+        else redPicks.pop();
+    } else {
+        if (lastAction.team === 'blue') blueBans.pop();
+        else redBans.pop();
+    }
+
+    // Update UI
+    playSound('click'); // Atau sound 'cancel' jika ada
+    renderSlots();
+    renderGrid(characters);
+    updateStatus();
+    
+    // Reset timer agar adil
+    resetRoundTimer(); 
+    // Pastikan timer jalan
+    if(isPaused) togglePauseTimer(); 
 }
 
 function handleCharClick(char) {
@@ -373,23 +423,32 @@ function renderPhase1Top(team, currentPhase) {
     }
 }
 
-// LOGIKA LAMA DIKEMBALIKAN: Panel Bawah tempat drafting aktif
 function renderActiveSlots(team, currentPhase) {
     const container = document.getElementById(`${team}-active-slots`);
     container.innerHTML = '';
     
     const picks = team === 'blue' ? bluePicks : redPicks;
-    
-    // Ambil pick sesuai phase yang sedang berjalan (Bisa Phase 1 atau Phase 2)
     const activePicks = picks.filter(p => p.phase === currentPhase);
 
-    // Loop 4 slot (karena setiap phase max 4 hero)
+    // Cek langkah terakhir untuk fitur Undo
+    const lastStepIndex = currentStep - 1;
+    const lastAction = currentStep > 0 ? draftFlow[lastStepIndex] : null;
+
     for(let i=0; i<4; i++) {
         if (i < activePicks.length) {
             const char = activePicks[i].char;
-            container.innerHTML += `<div class="slot filled" style="border-color:${char.color}; background:rgba(255,255,255,0.1);">${createIcon(char, 40)}<span>${char.name}</span></div>`;
+            
+            // Cek apakah slot ini adalah langkah terakhir yang dilakukan?
+            // Syarat: Tipe 'pick', Tim sama, dan ini adalah elemen terakhir array
+            let isUndoable = false;
+            if (lastAction && lastAction.type === 'pick' && lastAction.team === team && i === activePicks.length - 1) {
+                isUndoable = true;
+            }
+
+            const undoAttr = isUndoable ? `onclick="undoLastMove()" style="cursor:pointer; border-color:${char.color}; background:rgba(255,255,255,0.1); box-shadow: 0 0 10px red;" title="Klik untuk Undo"` : `style="border-color:${char.color}; background:rgba(255,255,255,0.1);"`;
+
+            container.innerHTML += `<div class="slot filled" ${undoAttr}>${createIcon(char, 40)}<span>${char.name}</span></div>`;
         } else {
-            // Teks placeholder sesuai phase
             const text = currentPhase === 1 ? "CHAR KOMPE P1" : "CHAR KOMPE P2";
             container.innerHTML += `<div class="slot">${text}</div>`;
         }
@@ -397,27 +456,32 @@ function renderActiveSlots(team, currentPhase) {
 }
 
 function renderActiveBans(team, currentPhase) {
-    // 1. UPDATE JUDUL LABEL BAN (Otomatis ganti Phase 1 / Phase 2)
+    // Update Judul
     const banLabel = document.getElementById(`${team}-ban-label`);
-    if (banLabel) {
-        banLabel.textContent = `BANS (PHASE ${currentPhase})`;
-    }
+    if (banLabel) banLabel.textContent = `BANS (PHASE ${currentPhase})`;
 
-    // 2. RENDER SLOT BAN
     const container = document.getElementById(`${team}-active-bans`);
     container.innerHTML = '';
     
     const bans = team === 'blue' ? blueBans : redBans;
-    
-    // Ambil ban HANYA untuk phase yang sedang aktif
     const currentBans = bans.filter(b => b.phase === currentPhase);
     
-    // Render ban yang sudah dipilih
-    currentBans.forEach(b => {
-        container.innerHTML += `<div class="team-ban-slot filled" style="border-color:${b.char.color}; background:${b.char.color};">${createIcon(b.char, '100%')}</div>`;
+    // Cek langkah terakhir untuk fitur Undo
+    const lastStepIndex = currentStep - 1;
+    const lastAction = currentStep > 0 ? draftFlow[lastStepIndex] : null;
+
+    currentBans.forEach((b, index) => {
+        let isUndoable = false;
+        // Cek apakah ini ban terakhir yang dilakukan?
+        if (lastAction && lastAction.type === 'ban' && lastAction.team === team && index === currentBans.length - 1) {
+            isUndoable = true;
+        }
+
+        const undoAttr = isUndoable ? `onclick="undoLastMove()" style="cursor:pointer; border-color:${b.char.color}; background:${b.char.color}; box-shadow: 0 0 10px red;" title="Klik untuk Undo"` : `style="border-color:${b.char.color}; background:${b.char.color};"`;
+
+        container.innerHTML += `<div class="team-ban-slot filled" ${undoAttr}>${createIcon(b.char, '100%')}</div>`;
     });
     
-    // Render sisa slot kosong (Total 3 Ban per Phase)
     const emptySlots = 3 - currentBans.length;
     for(let i=0; i < emptySlots; i++) {
         container.innerHTML += `<div class="team-ban-slot"></div>`;
