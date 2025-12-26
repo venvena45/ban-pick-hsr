@@ -227,59 +227,46 @@ function autoPickRandom() {
     }
 }
 
+// --- LOGIKA UTAMA (FIXED: PICK & BAN TERPISAH) ---
 function isCharAvailable(charId, team, phaseType) {
-    // 1. Cek Universal Ban (Tetap dilarang untuk kedua tim)
+    // 1. Cek Universal Ban (Selalu dilarang)
     if (univBanSet.has(charId)) return false;
 
-    // Tentukan Phase saat ini
     const currentPhase = draftFlow[currentStep] ? draftFlow[currentStep].phase : 1;
 
-    // Data Pick Tim Sendiri (Global - Semua Phase) untuk cek duplikat tim
-    const myTeamPicks = team === 'blue' ? bluePicks : redPicks;
-
-    // Data Ban Phase Ini
+    // Filter Data Ban di Phase Ini
     const activeBlueBans = blueBans.filter(b => b.phase === currentPhase);
-    const activeRedBans  = redBans.filter(b => b.phase === currentPhase);
+    const activeRedBans = redBans.filter(b => b.phase === currentPhase);
+    
+    // Cek apakah sudah diban tim sendiri?
+    const isBannedByBlue = activeBlueBans.some(b => b.char.id === charId);
+    const isBannedByRed = activeRedBans.some(b => b.char.id === charId);
 
-    // Data Pick Phase Ini (Untuk mencegah ban hero yang baru saja dipick saat ini)
-    const activeBluePicks = bluePicks.filter(p => p.phase === currentPhase);
-    const activeRedPicks  = redPicks.filter(p => p.phase === currentPhase);
-    const allActivePicks  = [...activeBluePicks, ...activeRedPicks];
+    // Cek Ban Lawan (Untuk Pick)
+    const isBannedByOpponent = (team === 'blue' && isBannedByRed) || (team === 'red' && isBannedByBlue);
 
-    // --- LOGIKA PICK (YANG DIUBAH) ---
+    // Cek Pick Tim Sendiri (Global - Gaboleh pick 2x karakter sama)
+    const isPickedByBlue = bluePicks.some(p => p.char.id === charId);
+    const isPickedByRed = redPicks.some(p => p.char.id === charId);
+    const isPickedBySelf = (team === 'blue' && isPickedByBlue) || (team === 'red' && isPickedByRed);
+
+    // --- LOGIKA PICK ---
     if (phaseType === 'pick') {
-        // Rule 1: Global Team Lock (Tim sendiri tidak boleh pick char yang sama 2x)
-        if (myTeamPicks.some(p => p.char.id === charId)) return false;
-
-        // Rule 2: CEK BAN LAWAN SAJA
-        // "Kita ban lawan, kita tetap bisa pakai. Tapi kalau lawan ban kita, kita gabisa pakai."
-        
-        if (team === 'blue') {
-            // Jika saya Blue, cek apakah RED nge-ban char ini?
-            // (Ban saya sendiri ke Red tidak ngefek ke saya)
-            const isBannedByRed = activeRedBans.some(b => b.char.id === charId);
-            if (isBannedByRed) return false;
-        } 
-        else if (team === 'red') {
-            // Jika saya Red, cek apakah BLUE nge-ban char ini?
-            const isBannedByBlue = activeBlueBans.some(b => b.char.id === charId);
-            if (isBannedByBlue) return false;
-        }
-
+        if (isBannedByOpponent) return false; // Gaboleh pick yang diban lawan
+        if (isPickedBySelf) return false;     // Gaboleh pick yang sudah kita pick
         return true; 
     }
 
     // --- LOGIKA BAN ---
     if (phaseType === 'ban') {
-        // Rule: Sudah dipick di Phase ini (Tidak boleh ban char yang sudah diamankan)
-        if (allActivePicks.some(p => p.char.id === charId)) return false;
+        // PERBAIKAN DI SINI:
+        // Kita HANYA melarang ban jika karakter itu SUDAH KITA BAN SENDIRI sebelumnya.
+        if (team === 'blue' && isBannedByBlue) return false;
+        if (team === 'red' && isBannedByRed) return false;
 
-        // Rule: Jangan ban char yang sudah KITA ban sendiri (duplikat ban tim sendiri)
-        const myActiveBans = team === 'blue' ? activeBlueBans : activeRedBans;
-        if (myActiveBans.some(b => b.char.id === charId)) return false;
-
-        // Mirror Ban: Kita TIDAK mengecek ban lawan. 
-        // Jadi boleh ban char yang sama dengan yang diban lawan (Double Ban).
+        // Kita MENGIZINKAN ban karakter yang sudah di-pick (oleh siapapun).
+        // Kita MENGIZINKAN ban karakter yang sudah di-ban lawan (Double Ban).
+        
         return true;
     }
 
@@ -519,8 +506,18 @@ function renderGrid(chars) {
         const pickedBlue = bluePicks.some(p => p.char.id === char.id);
         const pickedRed = redPicks.some(p => p.char.id === char.id);
         
-        if (activeTeam === 'blue' && pickedBlue) { isUnavailable = true; isGreyedOut = true; }
-        if (activeTeam === 'red' && pickedRed) { isUnavailable = true; isGreyedOut = true; }
+        // 🔥 KUNCI PICK HANYA SAAT PICK PHASE
+        if (isPick) {
+            if (activeTeam === 'blue' && pickedBlue) {
+                isUnavailable = true;
+                isGreyedOut = true;
+            }
+            if (activeTeam === 'red' && pickedRed) {
+                isUnavailable = true;
+                isGreyedOut = true;
+            }
+        }
+
 
         const bannedBlueNow = activeBlueBans.some(b => b.char.id === char.id);
         const bannedRedNow = activeRedBans.some(b => b.char.id === char.id);

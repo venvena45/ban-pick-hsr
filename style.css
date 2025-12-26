@@ -385,3 +385,4 @@ body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }
     .result-container { flex-direction: column; gap: 10px; }
     .result-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
 }
+
