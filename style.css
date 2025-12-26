@@ -40,7 +40,7 @@ body {
 }
 .game-started #start-overlay { display: none; }
 
-/* ================= TOP DASHBOARD (NEW LAYOUT) ================= */
+/* ================= TOP DASHBOARD ================= */
 .top-dashboard {
     display: flex;
     justify-content: space-between;
@@ -97,47 +97,108 @@ body {
 
 .p1-slot img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Center Dashboard (Timer) */
+/* ================= CENTER DASHBOARD (TIMER & BUTTONS) - FIXED ================= */
 .center-dashboard {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     min-width: 300px;
+    z-index: 20;
 }
 
 h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
 
-#timer-wrapper { display: flex; align-items: center; gap: 15px; margin-bottom: 5px; }
-#timer-container {
-    background: rgba(0, 0, 0, 0.6); border: 3px solid var(--gold); border-radius: 50%;
-    width: 60px; height: 60px; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; box-shadow: 0 0 15px rgba(212, 177, 104, 0.5);
+#timer-wrapper { 
+    display: flex; 
+    flex-direction: row; /* Layout Kiri-Kanan */
+    align-items: center; 
+    justify-content: center;
+    gap: 15px; /* Jarak antara lingkaran timer dan tombol */
+    margin-bottom: 5px; 
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 1px solid #444;
 }
+
+#timer-container {
+    background: rgba(0, 0, 0, 0.8); 
+    border: 3px solid var(--gold); 
+    border-radius: 50%;
+    width: 70px; 
+    height: 70px; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 0 15px rgba(212, 177, 104, 0.5);
+    flex-shrink: 0;
+}
+
 #timer { font-size: 1.8rem; font-weight: bold; color: white; line-height: 1; }
 #timer-container span { font-size: 0.5rem; color: #ccc; }
 
-.timer-controls { display: flex; flex-direction: column; gap: 2px; align-items: center; }
-#pause-btn {
-    background: #ffc107; border: none; padding: 5px 10px;
-    border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.8rem;
+/* Kontrol Tombol (Start, Undo, Reset) */
+.timer-controls { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    align-items: center; 
+    width: 140px; /* Lebar tetap agar tombol Start & Undo/Reset rata */
 }
-#pause-btn.paused { background: #28a745; color: white; }
 
-#reset-btn {
-    background: #d9534f;
+#pause-btn {
+    width: 100%;
+    background: #28a745; 
+    border: none; 
+    padding: 8px 0;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 0.9rem;
+    color: white;
+    text-transform: uppercase;
+}
+#pause-btn.paused { background: #ffc107; color: black; }
+
+/* Group Undo & Reset */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    width: 100%;
+}
+
+#undo-btn, #reset-btn {
+    flex: 1; /* Membagi lebar 50:50 */
     border: none;
-    padding: 2px 10px;
+    padding: 8px 0;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: white;
-    margin-top: 3px;
     transition: 0.3s;
+    margin: 0;
 }
+
+#undo-btn { background: #6f42c1; } /* Warna Ungu */
+#undo-btn:hover { background: #5a32a3; box-shadow: 0 0 5px rgba(111, 66, 193, 0.5); }
+#undo-btn:disabled { background: #444; cursor: not-allowed; opacity: 0.5; }
+
+#reset-btn { background: #d9534f; } /* Warna Merah */
 #reset-btn:hover { background: #c9302c; }
+
+#timer-status {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ccc;
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
 
 #status-bar {
     padding: 5px 20px; font-size: 0.9rem; font-weight: bold;
@@ -160,27 +221,7 @@ h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2p
 .team-title { text-align: center; font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
 .team-panel.active-turn { box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); border-color: var(--gold); }
 
-/* --- HISTORY PHASE 1 (Legacy / Hidden) --- */
-.phase-history {
-    background: rgba(0,0,0,0.4); 
-    padding: 8px; 
-    border-radius: 6px; 
-    margin-bottom: 10px;
-    border: 1px dashed #555;
-    display: flex; flex-direction: column; gap: 8px;
-}
-.phase-history.hidden { display: none; }
-.history-section { display: flex; flex-direction: column; gap: 3px; }
-.history-label { font-size: 0.65rem; color: #aaa; text-align: left; font-weight: bold; margin-left: 2px; letter-spacing: 1px; }
-.history-row { display: flex; gap: 5px; justify-content: flex-start; }
-.history-slot {
-    width: 35px; height: 35px; border-radius: 4px; overflow: hidden; 
-    border: 1px solid #555; background: rgba(0,0,0,0.3);
-    display: flex; align-items: center; justify-content: center;
-}
-.history-slot img { width: 100%; height: 100%; object-fit: cover; }
-
-/* SLOT AKTIF (PHASE 2) */
+/* SLOT AKTIF */
 .slot-container { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 .slot {
     background: rgba(0,0,0,0.5); height: 60px; border-radius: 5px;
@@ -189,7 +230,7 @@ h1 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2p
 .slot.filled { border: 1px solid var(--gold); background: rgba(255, 255, 255, 0.1); }
 .slot img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
 
-/* BANS SECTION (Updated Layout) */
+/* BANS SECTION */
 .ban-section { 
     border-top: none; 
     border-bottom: 1px solid #444; 
@@ -352,12 +393,7 @@ body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }
 
 /* RESPONSIVE */
 @media screen and (max-width: 1000px) {
-    /* Stack Dashboard */
-    .top-dashboard {
-        flex-direction: column; 
-        align-items: center;
-        gap: 10px;
-    }
+    .top-dashboard { flex-direction: column; align-items: center; gap: 10px; }
     .p1-box { width: 100%; max-width: 400px; }
     .center-dashboard { order: -1; margin-bottom: 5px; width: 100%; }
     
@@ -374,7 +410,6 @@ body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }
     .slot { height: 35px; font-size: 0.7rem; }
     .slot img { width: 25px; height: 25px; }
     .team-ban-slot { width: 30px; height: 30px; }
-    .history-slot { width: 30px; height: 30px; }
 
     h1 { font-size: 1rem; }
     #timer-container { width: 50px; height: 50px; }
@@ -386,3 +421,45 @@ body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }
     .result-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
 }
 
+.team-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.team-input-container input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #555;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    outline: none;
+    width: 180px;
+    transition: 0.3s;
+}
+
+.team-input-container input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(212, 177, 104, 0.3);
+}
+
+#input-blue-name { border-color: var(--blue-team); }
+#input-red-name { border-color: var(--red-team); }
+
+.vs-text {
+    font-weight: 800;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+/* Responsif untuk HP */
+@media screen and (max-width: 600px) {
+    .team-input-container { flex-direction: column; gap: 10px; }
+    .vs-text { font-size: 1rem; margin: -5px 0; }
+}

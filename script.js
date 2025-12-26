@@ -134,6 +134,8 @@ let redPicks = [];
 let blueBans = [];
 let redBans = [];
 let univBanSet = new Set();
+let teamBlueName = "BLUE TEAM";
+let teamRedName = "RED TEAM";
 
 let isUniversalMode = false;
 let timeLeft = 30;
@@ -164,7 +166,19 @@ function playCharSound(char, type) {
 
 // --- TIMER & GAME ---
 function startGame() {
+    // 1. Ambil nama dari input
+    const bInput = document.getElementById('input-blue-name').value;
+    const rInput = document.getElementById('input-red-name').value;
+
+    // 2. Jika ada isinya, pakai input user. Jika kosong, pakai default.
+    if (bInput.trim() !== "") teamBlueName = bInput.trim();
+    else teamBlueName = "BLUE TEAM";
+
+    if (rInput.trim() !== "") teamRedName = rInput.trim();
+    else teamRedName = "RED TEAM";
+
     document.body.classList.add('game-started');
+    renderSlots();
     updateStatus();
     isPaused = true; 
     timeLeft = 30;
@@ -273,34 +287,6 @@ function isCharAvailable(charId, team, phaseType) {
     return false;
 }
 
-function undoLastMove() {
-    if (currentStep === 0) return; // Tidak ada yang bisa di-undo
-
-    // Kurangi langkah
-    currentStep--;
-    const lastAction = draftFlow[currentStep];
-
-    // Hapus data dari array yang sesuai
-    if (lastAction.type === 'pick') {
-        if (lastAction.team === 'blue') bluePicks.pop();
-        else redPicks.pop();
-    } else {
-        if (lastAction.team === 'blue') blueBans.pop();
-        else redBans.pop();
-    }
-
-    // Update UI
-    playSound('click'); // Atau sound 'cancel' jika ada
-    renderSlots();
-    renderGrid(characters);
-    updateStatus();
-    
-    // Reset timer agar adil
-    resetRoundTimer(); 
-    // Pastikan timer jalan
-    if(isPaused) togglePauseTimer(); 
-}
-
 function handleCharClick(char) {
     if (isUniversalMode) { addUniversalBan(char); return; }
     if (isPaused) { alert("Silakan klik START/RESUME untuk melanjutkan."); return; }
@@ -340,29 +326,25 @@ function handleCharClick(char) {
 
 // --- RENDER SYSTEM UPDATED ---
 
-// --- RENDER SYSTEM (FIXED LOGIC) ---
-
 function renderSlots() {
-    // Cek Phase saat ini
-    // Cek Phase saat ini
     const currentPhase = currentStep < draftFlow.length ? draftFlow[currentStep].phase : 2;
 
-    // --- TAMBAHKAN INI (UPDATE JUDUL OTOMATIS) ---
-    document.getElementById('blue-title').textContent = `BLUE TEAM - PHASE ${currentPhase}`;
-    document.getElementById('red-title').textContent = `RED TEAM - PHASE ${currentPhase}`;
-    // ----------------------------------------------
+    // --- UPDATE JUDUL MENGGUNAKAN NAMA KUSTOM ---
+    document.getElementById('blue-title').textContent = `${teamBlueName} - PHASE ${currentPhase}`;
+    document.getElementById('red-title').textContent = `${teamRedName} - PHASE ${currentPhase}`;
+    
+    // Update juga judul kotak kecil di atas (Top Dashboard)
+    const p1BlueTitle = document.querySelector('.team-blue-p1 .p1-title');
+    if(p1BlueTitle) p1BlueTitle.textContent = `${teamBlueName} - P1`;
+    
+    const p1RedTitle = document.querySelector('.team-red-p1 .p1-title');
+    if(p1RedTitle) p1RedTitle.textContent = `${teamRedName} - P1`;
 
     // 1. Render Dashboard Atas
     renderPhase1Top('blue', currentPhase);
     renderPhase1Top('red', currentPhase);
 
-    // 1. Render Dashboard Atas (History Phase 1)
-    // HANYA MUNCUL jika Phase 1 sudah selesai (Artinya kita ada di Phase 2 atau Game Over)
-    renderPhase1Top('blue', currentPhase);
-    renderPhase1Top('red', currentPhase);
-
     // 2. Render Panel Bawah (Tempat Drafting Utama)
-    // Panel ini selalu menampilkan slot aktif sesuai phase yang berjalan (1 atau 2)
     renderActiveSlots('blue', currentPhase);
     renderActiveSlots('red', currentPhase);
 
@@ -382,7 +364,6 @@ function renderSlots() {
     for(; i<4; i++) univContainer.innerHTML += `<div class="univ-ban-box" id="univ-${i}" onclick="removeUnivBan('${i}')"></div>`;
 }
 
-// LOGIKA BARU: Kotak Atas hanya terisi jika Phase > 1
 function renderPhase1Top(team, currentPhase) {
     const container = document.getElementById(`${team}-p1-display`);
     container.innerHTML = '';
@@ -425,14 +406,12 @@ function renderActiveSlots(team, currentPhase) {
         if (i < activePicks.length) {
             const char = activePicks[i].char;
             
-            // Cek apakah slot ini adalah langkah terakhir yang dilakukan?
-            // Syarat: Tipe 'pick', Tim sama, dan ini adalah elemen terakhir array
             let isUndoable = false;
             if (lastAction && lastAction.type === 'pick' && lastAction.team === team && i === activePicks.length - 1) {
                 isUndoable = true;
             }
 
-            const undoAttr = isUndoable ? `onclick="undoLastMove()" style="cursor:pointer; border-color:${char.color}; background:rgba(255,255,255,0.1); box-shadow: 0 0 10px red;" title="Klik untuk Undo"` : `style="border-color:${char.color}; background:rgba(255,255,255,0.1);"`;
+            const undoAttr = isUndoable ? `onclick="triggerUndo()" style="cursor:pointer; border-color:${char.color}; background:rgba(255,255,255,0.1); box-shadow: 0 0 10px red;" title="Klik untuk Undo"` : `style="border-color:${char.color}; background:rgba(255,255,255,0.1);"`;
 
             container.innerHTML += `<div class="slot filled" ${undoAttr}>${createIcon(char, 40)}<span>${char.name}</span></div>`;
         } else {
@@ -453,18 +432,16 @@ function renderActiveBans(team, currentPhase) {
     const bans = team === 'blue' ? blueBans : redBans;
     const currentBans = bans.filter(b => b.phase === currentPhase);
     
-    // Cek langkah terakhir untuk fitur Undo
     const lastStepIndex = currentStep - 1;
     const lastAction = currentStep > 0 ? draftFlow[lastStepIndex] : null;
 
     currentBans.forEach((b, index) => {
         let isUndoable = false;
-        // Cek apakah ini ban terakhir yang dilakukan?
         if (lastAction && lastAction.type === 'ban' && lastAction.team === team && index === currentBans.length - 1) {
             isUndoable = true;
         }
 
-        const undoAttr = isUndoable ? `onclick="undoLastMove()" style="cursor:pointer; border-color:${b.char.color}; background:${b.char.color}; box-shadow: 0 0 10px red;" title="Klik untuk Undo"` : `style="border-color:${b.char.color}; background:${b.char.color};"`;
+        const undoAttr = isUndoable ? `onclick="triggerUndo()" style="cursor:pointer; border-color:${b.char.color}; background:${b.char.color}; box-shadow: 0 0 10px red;" title="Klik untuk Undo"` : `style="border-color:${b.char.color}; background:${b.char.color};"`;
 
         container.innerHTML += `<div class="team-ban-slot filled" ${undoAttr}>${createIcon(b.char, '100%')}</div>`;
     });
@@ -506,7 +483,6 @@ function renderGrid(chars) {
         const pickedBlue = bluePicks.some(p => p.char.id === char.id);
         const pickedRed = redPicks.some(p => p.char.id === char.id);
         
-        // 🔥 KUNCI PICK HANYA SAAT PICK PHASE
         if (isPick) {
             if (activeTeam === 'blue' && pickedBlue) {
                 isUnavailable = true;
@@ -517,7 +493,6 @@ function renderGrid(chars) {
                 isGreyedOut = true;
             }
         }
-
 
         const bannedBlueNow = activeBlueBans.some(b => b.char.id === char.id);
         const bannedRedNow = activeRedBans.some(b => b.char.id === char.id);
@@ -560,7 +535,14 @@ function updateStatus() {
         bar.textContent = "SELESAI"; bar.style.backgroundColor = "#d4b168"; return;
     }
     const curr = draftFlow[currentStep];
-    bar.textContent = curr.text;
+    
+    // --- GANTI TEKS STATUS BAR SECARA DINAMIS ---
+    let displayText = curr.text;
+    displayText = displayText.replace('BLUE', teamBlueName.toUpperCase());
+    displayText = displayText.replace('RED', teamRedName.toUpperCase());
+    
+    bar.textContent = displayText;
+
     bar.style.backgroundColor = curr.team === 'blue' ? 'var(--blue-team)' : 'var(--red-team)';
     
     if (curr.team === 'blue') bluePanel.classList.add('active-turn');
@@ -604,6 +586,10 @@ function showFinalResult() {
     const redP2Cont = document.getElementById('final-red-p2');
     const banContainer = document.getElementById('final-bans');
 
+    // Update Judul di Overlay Result
+    document.querySelector('.result-team-box.blue h2').textContent = teamBlueName;
+    document.querySelector('.result-team-box.red h2').textContent = teamRedName;
+
     overlay.style.display = 'flex';
 
     const renderCard = (char) => {
@@ -637,30 +623,29 @@ function showFinalResult() {
     });
 }
 
-// --- FUNGSI RESET DRAFT ---
 function resetDraft() {
-    // 1. Konfirmasi
     if (!confirm("Ulangi draft dari awal? (Data saat ini akan dihapus)")) {
         return;
     }
 
-    // 2. Hentikan Timer LAMA
     clearInterval(timerInterval); 
     isPaused = true;
 
-    // 3. Bersihkan Semua Data
     currentStep = 0;
     bluePicks = [];
     redPicks = [];
     blueBans = [];
     redBans = [];
     univBanSet.clear();
+
+    teamBlueName = "BLUE TEAM";
+    teamRedName = "RED TEAM";
+    document.getElementById('input-blue-name').value = "";
+    document.getElementById('input-red-name').value = "";
     
-    // 4. Reset Variabel Mode & Waktu
     isUniversalMode = false;
     timeLeft = 30;
 
-    // 5. Reset Tampilan Tombol Universal
     const univBtn = document.getElementById('toggle-univ-btn');
     if (univBtn) {
         univBtn.textContent = "OFF";
@@ -668,43 +653,86 @@ function resetDraft() {
         document.body.classList.remove('universal-mode-active');
     }
 
-    // 6. Reset Header Timer & Tombol Start
     const statusEl = document.getElementById('timer-status');
     const pauseBtn = document.getElementById('pause-btn');
     
-    // Kembalikan tombol jadi "START" (Posisi Ready)
     pauseBtn.innerText = "START";
     pauseBtn.classList.add('paused'); 
     
     statusEl.innerText = "READY";
     statusEl.style.color = "white";
     
-    // Update angka timer
     updateTimerDisplay();
 
-    // 7. Sembunyikan Overlay Hasil (Jika sedang terbuka)
     const overlay = document.getElementById('result-overlay');
-    if (overlay) overlay.style.display = 'none'; // Tambahkan check if exist biar aman
+    if (overlay) overlay.style.display = 'none';
 
-    // 8. Render Ulang Grid & Slot (Kosongkan Tampilan)
     renderSlots();
     renderGrid(characters);
     updateStatus();
 
-    // --- PERBAIKAN DI SINI ---
-    // Nyalakan kembali loop timer (meskipun dalam keadaan paused)
-    // Supaya saat tombol START ditekan, intervalnya sudah hidup.
     runTimerLoop(); 
 }
 
 function downloadScreenshot() {
     const element = document.getElementById('capture-area');
-    html2canvas(element, { backgroundColor: '#1d1e26' }).then(canvas => {
+    
+    // Tambahkan konfigurasi useCORS: true
+    html2canvas(element, { 
+        useCORS: true,       
+        allowTaint: true,    
+        backgroundColor: '#1d1e26',
+        scale: 2             
+    }).then(canvas => {
         const link = document.createElement('a');
         link.download = `HSR_Draft_Result_${Date.now()}.png`;
-        link.href = canvas.toDataURL();
+        link.href = canvas.toDataURL("image/png");
         link.click();
+    }).catch(err => {
+        console.error("Gagal mengambil screenshot:", err);
+        alert("Gagal menyimpan gambar. Cek console log.");
     });
+}
+
+function triggerUndo() {
+    if (currentStep <= 0) {
+        const btn = document.getElementById('undo-btn');
+        btn.style.transform = "translateX(5px)";
+        setTimeout(() => btn.style.transform = "translateX(0)", 100);
+        return; 
+    }
+
+    undoLastMove();
+}
+
+function undoLastMove() {
+    if (currentStep === 0) return;
+
+    currentStep--;
+    const lastAction = draftFlow[currentStep];
+
+    if (lastAction.type === 'pick') {
+        if (lastAction.team === 'blue') bluePicks.pop();
+        else redPicks.pop();
+    } else {
+        if (lastAction.team === 'blue') blueBans.pop();
+        else redBans.pop();
+    }
+
+    clearInterval(timerInterval); 
+    timeLeft = 30; 
+    isPaused = true; 
+    
+    updateTimerDisplay();
+    updateTimerStatus(); 
+    
+    renderSlots();
+    renderGrid(characters);
+    updateStatus();
+
+    playSound('click'); 
+
+    runTimerLoop(); 
 }
 
 init();
