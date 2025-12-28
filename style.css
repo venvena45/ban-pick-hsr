@@ -463,3 +463,93 @@ body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }
     .team-input-container { flex-direction: column; gap: 10px; }
     .vs-text { font-size: 1rem; margin: -5px 0; }
 }
+
+/* --- UPDATE RESULT LAYOUT (Agar Ban masuk ke dalam kotak tim) --- */
+
+/* Container tombol download */
+.download-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+/* Style Tombol Baru */
+.result-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 150px;
+    justify-content: center;
+}
+
+.btn-blue {
+    background: linear-gradient(135deg, var(--blue-team), #2980b9);
+    border: 1px solid #4a90e2;
+}
+.btn-blue:hover { box-shadow: 0 0 15px rgba(74, 144, 226, 0.6); transform: translateY(-2px); }
+
+.btn-red {
+    background: linear-gradient(135deg, var(--red-team), #c0392b);
+    border: 1px solid #e74c3c;
+}
+.btn-red:hover { box-shadow: 0 0 15px rgba(231, 76, 60, 0.6); transform: translateY(-2px); }
+
+/* Style Tombol Reset/Tutup */
+.btn-reset {
+    background: #ff4757; /* Warna Merah */
+    border: none;
+    color: white;
+    margin: 30px auto 0 auto; /* Margin auto kiri-kanan agar di tengah */
+    display: flex; /* Pastikan flex agar margin auto bekerja */
+    justify-content: center;
+    width: fit-content; /* Agar lebar tombol pas dengan teks */
+}
+
+.btn-reset:hover {
+    background: #e84118; /* Merah lebih gelap saat hover */
+    box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Layout Ban di dalam Kotak Tim */
+.internal-bans {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.internal-bans h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.75rem;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ban-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+/* Memastikan background box solid saat di-screenshot */
+.result-team-box {
+    background: #1e1e28; /* Warna solid gelap */
+    position: relative;
+    z-index: 1;
+}

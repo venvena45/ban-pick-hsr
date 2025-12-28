@@ -735,4 +735,138 @@ function undoLastMove() {
     runTimerLoop(); 
 }
 
+// --- UPDATE FUNGSI RESULT & DOWNLOAD ---
+
+function showFinalResult() {
+    const overlay = document.getElementById('result-overlay');
+    const resultContent = document.getElementById('capture-area'); // Target div konten
+    
+    // 1. Render Kartu Pick
+    const renderCard = (char) => {
+        const imgUrl = char.img ? `https://wsrv.nl/?url=${encodeURIComponent(char.img)}` : '';
+        return `
+            <div class="result-card" style="border-color:${char.color}">
+                <img src="${imgUrl}" onerror="this.style.display='none'">
+                <div style="width:100%;height:100%;background:${char.color};display:${char.img?'none':'flex'};justify-content:center;align-items:center;font-weight:bold;">${char.name.charAt(0)}</div>
+                <div class="name">${char.name}</div>
+            </div>
+        `;
+    };
+
+    // 2. Render Kartu Ban
+    const renderBans = (bans) => {
+        let html = '';
+        bans.forEach(b => {
+            const imgUrl = b.char.img ? `https://wsrv.nl/?url=${encodeURIComponent(b.char.img)}` : '';
+            html += `
+                <div class="result-ban-item" title="Banned Phase ${b.phase}">
+                    <img src="${imgUrl}">
+                    <div style="width:100%;height:100%;background:${b.char.color};display:${b.char.img?'none':'block'}"></div>
+                </div>
+            `;
+        });
+        return html || '<span style="font-size:0.7rem; color:#555;">No Bans</span>';
+    };
+
+    // 3. Siapkan Data HTML Per Tim
+    const blueP1 = bluePicks.filter(p => p.phase === 1).map(p => renderCard(p.char)).join('');
+    const blueP2 = bluePicks.filter(p => p.phase === 2).map(p => renderCard(p.char)).join('');
+    const blueBansHTML = renderBans(blueBans);
+
+    const redP1 = redPicks.filter(p => p.phase === 1).map(p => renderCard(p.char)).join('');
+    const redP2 = redPicks.filter(p => p.phase === 2).map(p => renderCard(p.char)).join('');
+    const redBansHTML = renderBans(redBans);
+
+    // 4. INJECT HTML BARU (Overwrites existing structure)
+    // Kita memasukkan Ban ke dalam kotak tim masing-masing agar ikut ter-screenshot
+    resultContent.innerHTML = `
+        <h1 style="color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 10px var(--gold);">TIM SABUNG HSR</h1>
+        
+        <div class="result-container">
+            <div class="result-team-box blue" id="result-box-blue" style="padding:15px; border-radius:10px; border:1px solid var(--blue-team);">
+                <h2 style="color: var(--blue-team); border-bottom: 1px solid #444; padding-bottom:5px; margin-top:0;">${teamBlueName}</h2>
+                
+                <div class="result-phase-block">
+                    <span class="res-phase-label">PHASE 1</span>
+                    <div class="result-grid">${blueP1}</div>
+                </div>
+                
+                <div class="result-phase-block" style="margin-top:10px;">
+                    <span class="res-phase-label">PHASE 2</span>
+                    <div class="result-grid">${blueP2}</div>
+                </div>
+
+                <div class="internal-bans">
+                    <h4>Banned Characters</h4>
+                    <div class="ban-row">${blueBansHTML}</div>
+                </div>
+            </div>
+
+            <div class="result-team-box red" id="result-box-red" style="padding:15px; border-radius:10px; border:1px solid var(--red-team);">
+                <h2 style="color: var(--red-team); border-bottom: 1px solid #444; padding-bottom:5px; margin-top:0;">${teamRedName}</h2>
+                
+                <div class="result-phase-block">
+                    <span class="res-phase-label">PHASE 1</span>
+                    <div class="result-grid">${redP1}</div>
+                </div>
+                
+                <div class="result-phase-block" style="margin-top:10px;">
+                    <span class="res-phase-label">PHASE 2</span>
+                    <div class="result-grid">${redP2}</div>
+                </div>
+
+                <div class="internal-bans">
+                    <h4>Banned Characters</h4>
+                    <div class="ban-row">${redBansHTML}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-actions">
+            <button class="result-btn btn-blue" onclick="downloadTeam('blue')">
+                ⬇ ${teamBlueName}
+            </button>
+            <button class="result-btn btn-red" onclick="downloadTeam('red')">
+                ⬇ ${teamRedName}
+            </button>
+        </div>
+
+        <button onclick="resetDraft()" class="result-btn btn-reset">ULANGI DRAFT</button>
+        
+        <div style="margin-top: 15px; font-size: 0.8rem; color: #666;">
+            Contact Support: <strong style="color:#7289da">venvena</strong>
+        </div>
+    `;
+
+    overlay.style.display = 'flex';
+}
+
+// Fungsi Download Per Tim
+function downloadTeam(team) {
+    const elementId = team === 'blue' ? 'result-box-blue' : 'result-box-red';
+    const element = document.getElementById(elementId);
+    
+    if (!element) return;
+
+    // Tentukan nama file
+    const teamName = team === 'blue' ? teamBlueName : teamRedName;
+    const cleanName = teamName.replace(/[^a-zA-Z0-9]/g, '_'); // Bersihkan karakter aneh
+    const fileName = `HSR_Draft_${cleanName}_${Date.now()}.png`;
+
+    html2canvas(element, { 
+        useCORS: true,       
+        allowTaint: true,    
+        backgroundColor: '#1d1e26', // Warna background gambar (dark theme)
+        scale: 2, // Resolusi lebih tinggi
+        logging: false
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    }).catch(err => {
+        console.error("Gagal screenshot:", err);
+        alert("Gagal menyimpan gambar.");
+    });
+}
 init();
