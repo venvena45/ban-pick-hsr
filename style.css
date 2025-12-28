@@ -553,3 +553,42 @@ body.universal-mode-active .team-panel { opacity: 0.3; pointer-events: none; }
     position: relative;
     z-index: 1;
 }
+
+/* --- TAMBAHAN UNTUK TOMBOL PHASE DOWNLOAD --- */
+
+/* Wrapper header fase agar judul dan tombol sejajar */
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+/* Judul Fase */
+.res-phase-label {
+    font-size: 0.85rem; 
+    color: #aaa; 
+    font-weight: bold; 
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* Tombol Download Mini */
+.mini-dl-btn {
+    background: transparent;
+    border: 1px solid #555;
+    color: #ccc;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mini-dl-btn:hover {
+    background: var(--gold);
+    color: black;
+    border-color: var(--gold);
+}
