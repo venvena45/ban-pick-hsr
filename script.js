@@ -138,7 +138,7 @@ let teamBlueName = "BLUE TEAM";
 let teamRedName = "RED TEAM";
 
 let isUniversalMode = false;
-let timeLeft = 30;
+let timeLeft = 50;
 let timerInterval;
 let isPaused = true;
 
@@ -181,7 +181,7 @@ function startGame() {
     renderSlots();
     updateStatus();
     isPaused = true; 
-    timeLeft = 30;
+    timeLeft = 50;
     updateTimerDisplay();
     updateTimerStatus();
     runTimerLoop();
@@ -204,7 +204,7 @@ function runTimerLoop() {
 }
 
 function resetRoundTimer() {
-    timeLeft = 30;
+    timeLeft = 50;
     updateTimerDisplay();
 }
 
@@ -214,7 +214,7 @@ function updateTimerStatus() {
     const statusEl = document.getElementById('timer-status');
     const btn = document.getElementById('pause-btn');
     if (isPaused) {
-        if (currentStep === 0 && timeLeft === 30) {
+        if (currentStep === 0 && timeLeft === 50) {
             btn.innerText = "START"; statusEl.innerText = "READY"; statusEl.style.color = "white"; btn.classList.add('paused');
         } else {
             statusEl.innerText = "PAUSED"; statusEl.style.color = "#ffcc00"; btn.innerText = "RESUME"; btn.classList.add('paused');
@@ -644,7 +644,7 @@ function resetDraft() {
     document.getElementById('input-red-name').value = "";
     
     isUniversalMode = false;
-    timeLeft = 30;
+    timeLeft = 50;
 
     const univBtn = document.getElementById('toggle-univ-btn');
     if (univBtn) {
@@ -720,7 +720,7 @@ function undoLastMove() {
     }
 
     clearInterval(timerInterval); 
-    timeLeft = 30; 
+    timeLeft = 50; 
     isPaused = true; 
     
     updateTimerDisplay();
