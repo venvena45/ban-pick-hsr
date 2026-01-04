@@ -66,7 +66,8 @@ const characters = [
     { id: 'welt', name: 'Welt', path: 'Nihility', color: ELEMENT_COLORS.Imaginary, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/1/11/Character_Welt_Icon.png/revision/latest?cb=20230723082022' },
     { id: 'yanqing', name: 'Yanqing', path: 'The Hunt', color: ELEMENT_COLORS.Ice, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/5/57/Character_Yanqing_Icon.png/revision/latest?cb=20230723082139' },
     { id: 'yunli', name: 'Yunli', path: 'Destruction', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/4/43/Character_Yunli_Icon.png/revision/latest?cb=20240724122212' },
-    
+    { id: 'clara', name: 'Clara', path: 'Destruction', color: ELEMENT_COLORS.Physical, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/a/a4/Character_Clara_Icon.png/revision/latest?cb=20230723080716' },
+
     // --- 4 STAR CHARACTERS ---
     { id: 'arlan', name: 'Arlan', path: 'Destruction', color: ELEMENT_COLORS.Lightning, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/a/a9/Character_Arlan_Icon.png/revision/latest?cb=20230723080444' },
     { id: 'asta', name: 'Asta', path: 'Harmony', color: ELEMENT_COLORS.Fire, img: 'https://static.wikia.nocookie.net/houkai-star-rail/images/9/9f/Character_Asta_Icon.png/revision/latest?cb=20230723080506' },
@@ -847,7 +848,7 @@ function showFinalResult() {
         <button onclick="resetDraft()" class="result-btn btn-reset">ULANGI DRAFT</button>
         
         <div style="margin-top: 15px; font-size: 0.8rem; color: #666;">
-            Contact Support: <strong style="color:#7289da">venvena</strong>
+            Contact Support & Req Fitur: <strong style="color:#7289da">venvena</strong>
         </div>
     `;
 
